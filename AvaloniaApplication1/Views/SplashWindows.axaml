@@ -1,0 +1,37 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:AvaloniaApplication1.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="420" d:DesignHeight="220"
+        x:Class="AvaloniaApplication1.Views.SplashWindow"
+        x:DataType="vm:SplashViewModel"
+        Width="420" Height="220"
+        CanResize="False"
+        ShowInTaskbar="False"
+        Topmost="True"
+        WindowDecorations="None"
+        WindowStartupLocation="CenterScreen"
+        Title="Loading">
+
+    <Design.DataContext>
+        <vm:SplashViewModel/>
+    </Design.DataContext>
+
+    <Border BorderBrush="Gray" BorderThickness="1" Padding="24">
+        <StackPanel Orientation="Vertical" Spacing="16" VerticalAlignment="Center">
+
+            <TextBlock Text="{Binding Title}"
+                       FontSize="24"
+                       FontWeight="Bold"
+                       HorizontalAlignment="Center"/>
+
+            <ProgressBar IsIndeterminate="True" Height="6"/>
+
+            <TextBlock Text="{Binding Status}"
+                       HorizontalAlignment="Center"
+                       TextWrapping="Wrap"/>
+
+        </StackPanel>
+    </Border>
+</Window>

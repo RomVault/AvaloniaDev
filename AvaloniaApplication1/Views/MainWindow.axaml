@@ -1,0 +1,121 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:AvaloniaApplication1.ViewModels"
+        xmlns:local="using:AvaloniaApplication1"
+        xmlns:views="using:AvaloniaApplication1.Views"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="AvaloniaApplication1.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="AvaloniaApplication1">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+        to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+    <Window.Styles>
+        <!-- Image buttons: no chrome, and the PNG swaps on IsEnabled.
+        Source is set here (not inline) so the :disabled rule can win. -->
+        <Style Selector="Button.ImageButton">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="1"/>
+        </Style>
+
+        <Style Selector="Button#bUpdate Image">
+            <Setter Property="Source" Value="avares://AvaloniaApplication1/Assets/btnUpdateDats_Enabled.png"/>
+        </Style>
+        <Style Selector="Button#bUpdate:disabled Image">
+            <Setter Property="Source" Value="avares://AvaloniaApplication1/Assets/btnUpdateDats_Disabled.png"/>
+        </Style>
+
+        <Style Selector="Button#bScan Image">
+            <Setter Property="Source" Value="avares://AvaloniaApplication1/Assets/btnScanRoms_Enabled.png"/>
+        </Style>
+        <Style Selector="Button#bScan:disabled Image">
+            <Setter Property="Source" Value="avares://AvaloniaApplication1/Assets/btnScanRoms_Disabled.png"/>
+        </Style>
+
+        <Style Selector="Button#bFindFix Image">
+            <Setter Property="Source" Value="avares://AvaloniaApplication1/Assets/btnFindFixes_Enabled.png"/>
+        </Style>
+        <Style Selector="Button#bFindFix:disabled Image">
+            <Setter Property="Source" Value="avares://AvaloniaApplication1/Assets/btnFindFixes_Disabled.png"/>
+        </Style>
+
+        <Style Selector="Button#bFix Image">
+            <Setter Property="Source" Value="avares://AvaloniaApplication1/Assets/btnFixFiles_Enabled.png"/>
+        </Style>
+        <Style Selector="Button#bFix:disabled Image">
+            <Setter Property="Source" Value="avares://AvaloniaApplication1/Assets/btnFixFiles_Disabled.png"/>
+        </Style>
+    </Window.Styles>
+
+    <DockPanel>
+        <views:TopMenu DockPanel.Dock="Top"/>
+
+
+        <Grid
+            ColumnDefinitions="100,400,10,*"
+            RowDefinitions="160,*,*"
+            ColumnSpacing="6"
+            RowSpacing="6">
+
+            <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Vertical">
+                <Button x:Name="bUpdate" Classes="ImageButton" Click="bUpdate_Click" ToolTip.Tip="Update DAT">
+                    <Image Stretch="Uniform"/>
+                </Button>
+                <Button x:Name="bScan" Classes="ImageButton" ToolTip.Tip="Scan">
+                    <Image Stretch="Uniform"/>
+                </Button>
+                <Button x:Name="bFindFix" Classes="ImageButton" ToolTip.Tip="Find Fix">
+                    <Image Stretch="Uniform"/>
+                </Button>
+                <Button x:Name="bFix" Classes="ImageButton" ToolTip.Tip="Fix">
+                    <Image Stretch="Uniform"/>
+                </Button>
+
+
+            </StackPanel>
+
+
+            <ContentControl Grid.Column="1" Grid.Row="0" Content="{Binding TopDat}"/>
+
+            <TreeView Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" ItemsSource="{Binding Tree}">
+                <TreeView.ItemTemplate>
+                    <TreeDataTemplate x:DataType="vm:TreeNodeViewModel" ItemsSource="{Binding Children}">
+                        <StackPanel Orientation="Horizontal" Spacing="2">
+                            <CheckBox IsChecked="{Binding IsChecked}"/>
+                            <Image Source="{Binding Icon}"
+                                   Width="12"
+                                   Height="12"
+                                   Stretch="Uniform"
+                                   VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </TreeDataTemplate>
+                </TreeView.ItemTemplate>
+            </TreeView>
+
+            <!--
+            <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            -->
+
+            <GridSplitter Grid.Column="2" ResizeDirection="Columns" Background="Gray" Width="4" Grid.RowSpan="3" ToolTip.Tip="Drag to resize the DAT tree"/>
+
+
+
+            <ContentControl Grid.Column="3" Grid.Row="0" Content="{Binding TopDat1}"/>
+            <ContentControl Grid.Column="3" Grid.Row="1" Content="{Binding GameGrid}"/>
+            <TextBlock Grid.Column="3" Grid.Row="2" Text="{Binding Greeting1}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Grid>
+
+
+
+
+
+    </DockPanel>
+</Window>

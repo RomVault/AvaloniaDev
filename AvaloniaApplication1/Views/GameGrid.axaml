@@ -1,0 +1,59 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:AvaloniaApplication1.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="vm:GameGridViewModel"
+             x:Class="AvaloniaApplication1.Views.GameGridView">
+    <Design.DataContext>
+        <vm:GameGridViewModel/>
+    </Design.DataContext>
+
+        <DataGrid ItemsSource="{Binding Dats}"
+                  x:Name="GamesGrid"
+                  x:CompileBindings="False"
+                  AutoGenerateColumns="False" 
+                  CanUserResizeColumns="True"
+                  IsReadOnly="True"
+                  GridLinesVisibility="All"
+                  Height="300"
+                  RowHeight="20"
+                  ColumnHeaderHeight="25"
+                  Margin="0,0,0,0">
+            <DataGrid.ContextMenu>
+                <ContextMenu Opening="ContextMenu_Opening">
+                    <MenuItem Header="Scan1" Click="Scan1_Click"/>
+                    <MenuItem Header="Scan2" Click="Scan2_Click"/>
+                    <MenuItem Header="Scan3" Click="Scan3_Click"/>
+                    <Separator/>
+                    <MenuItem Header="Open Dir" Click="OpenDir_Click"/>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+            <DataGrid.Styles>
+                <Style Selector="DataGridRow">
+                    <Setter Property="Background" Value="{Binding BgBrush}"/>
+                </Style>
+                <Style Selector="DataGridCell">
+                    <Setter Property="Background" Value="Transparent"/>
+                </Style>
+            </DataGrid.Styles>
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Type" Width="100">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding gType}"
+                                   Height="16"
+                                   Stretch="Uniform"
+                                   Margin="0"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Game (Directory /Zip)" Binding="{Binding gName}" Width="200"/>
+                <DataGridTextColumn Header="Description" Binding="{Binding gDescription}" Width="300"/>
+                <DataGridTextColumn Header="Modified" Binding="{Binding gDate}" Width="200"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+
+</UserControl>
