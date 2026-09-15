@@ -5,6 +5,7 @@ using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using AvaloniaApplication1.Models;
 using System.ComponentModel;
+using System.Diagnostics;
 
 namespace AvaloniaApplication1.Views;
 
@@ -35,6 +36,7 @@ public partial class GameGridView : UserControl
         if (!_shiftOnPress)
         {
             e.Cancel = true;
+            return;
         }
     }
 
@@ -46,6 +48,24 @@ public partial class GameGridView : UserControl
 
     private void Scan1_Click(object? sender, RoutedEventArgs e)
     {
+        RunScan(1);
+    }
+
+    /// <summary>
+    /// Runs a scan against the row that was right-clicked. Does nothing when
+    /// the context menu was opened away from a row.
+    /// </summary>
+    private void RunScan(int level)
+    {
+        DatNode? node = SelectedNode;
+        if (node is null)
+        {
+            return;
+        }
+
+        // TODO: replace with the real scan once the scanning service exists.
+        Debug.WriteLine(
+            $"Scan{level} requested for '{node.gName}' ({node.gDescription}), dated {node.gDate:yyyy-MM-dd}.");
     }
 
     private void Scan2_Click(object? sender, RoutedEventArgs e)

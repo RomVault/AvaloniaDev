@@ -1,0 +1,41 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:AvaloniaApplication1.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="450"
+             x:Class="AvaloniaApplication1.Views.RVTreeView"
+             x:Name="Root">
+
+    <TreeView ItemsSource="{Binding #Root.Nodes}">
+        <TreeView.ContextMenu>
+            <ContextMenu Opening="ContextMenu_Opening">
+                <MenuItem x:Name="miScan1" Header="Scan1" Click="Scan1_Click"/>
+                <MenuItem x:Name="miScan2" Header="Scan2" Click="Scan2_Click"/>
+                <MenuItem x:Name="miScan3" Header="Scan3" Click="Scan3_Click"/>
+                <Separator x:Name="miSep"/>
+                <MenuItem x:Name="miOpenDir" Header="Open Dir"/>
+            </ContextMenu>
+        </TreeView.ContextMenu>
+
+        <TreeView.Resources>
+            <!-- Scoped to this TreeView only; doesn't affect
+            checkboxes elsewhere in the app. -->
+            <x:Double x:Key="CheckBoxMinHeight">20</x:Double>
+        </TreeView.Resources>
+
+        <TreeView.ItemTemplate>
+            <TreeDataTemplate x:DataType="vm:TreeNodeViewModel" ItemsSource="{Binding Children}">
+                <StackPanel Orientation="Horizontal" Spacing="2">
+                    <CheckBox IsChecked="{Binding IsChecked}"/>
+                    <Image Source="{Binding Icon}"
+                           Width="12"
+                           Height="12"
+                           Stretch="Uniform"
+                           VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
+                </StackPanel>
+            </TreeDataTemplate>
+        </TreeView.ItemTemplate>
+    </TreeView>
+</UserControl>

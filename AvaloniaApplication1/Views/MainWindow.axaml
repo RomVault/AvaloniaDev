@@ -17,6 +17,9 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
     <Window.Styles>
+
+
+
         <!-- Image buttons: no chrome, and the PNG swaps on IsEnabled.
         Source is set here (not inline) so the :disabled rule can win. -->
         <Style Selector="Button.ImageButton">
@@ -24,6 +27,22 @@
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Padding" Value="1"/>
         </Style>
+
+        <!-- Thin the tree rows.
+        TreeViewItem itself floors at 32px via the TreeViewItemMinHeight
+        resource (its own Padding is already 0). But the real floor turned
+        out to be the CheckBox in the row template: Fluent's CheckBox
+        template has an inner Grid hardcoded to
+        Height="{DynamicResource CheckBoxMinHeight}" (also 32) - a resource
+        binding, not a TemplateBinding, so setting CheckBox.MinHeight/
+        Padding directly (tried first) has no effect. Overriding
+        CheckBoxMinHeight down in TreeView.Resources below is what actually
+        shrinks it, scoped to just this tree's checkboxes. -->
+        <Style Selector="TreeViewItem">
+            <Setter Property="MinHeight" Value="10"/>
+            <Setter Property="Padding" Value="2,0"/>
+        </Style>
+
 
         <Style Selector="Button#bUpdate Image">
             <Setter Property="Source" Value="avares://AvaloniaApplication1/Assets/btnUpdateDats_Enabled.png"/>
@@ -53,6 +72,7 @@
             <Setter Property="Source" Value="avares://AvaloniaApplication1/Assets/btnFixFiles_Disabled.png"/>
         </Style>
     </Window.Styles>
+
 
     <DockPanel>
         <views:TopMenu DockPanel.Dock="Top"/>
@@ -84,21 +104,7 @@
 
             <ContentControl Grid.Column="1" Grid.Row="0" Content="{Binding TopDat}"/>
 
-            <TreeView Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" ItemsSource="{Binding Tree}">
-                <TreeView.ItemTemplate>
-                    <TreeDataTemplate x:DataType="vm:TreeNodeViewModel" ItemsSource="{Binding Children}">
-                        <StackPanel Orientation="Horizontal" Spacing="2">
-                            <CheckBox IsChecked="{Binding IsChecked}"/>
-                            <Image Source="{Binding Icon}"
-                                   Width="12"
-                                   Height="12"
-                                   Stretch="Uniform"
-                                   VerticalAlignment="Center"/>
-                            <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
-                        </StackPanel>
-                    </TreeDataTemplate>
-                </TreeView.ItemTemplate>
-            </TreeView>
+            <views:RVTreeView Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Nodes="{Binding Tree}"/>
 
             <!--
             <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -106,9 +112,24 @@
 
             <GridSplitter Grid.Column="2" ResizeDirection="Columns" Background="Gray" Width="4" Grid.RowSpan="3" ToolTip.Tip="Drag to resize the DAT tree"/>
 
-
-
+            <StackPanel Grid.Column="3" Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Center">
+                <StackPanel.Resources> 
+                    <x:Double x:Key="CheckBoxMinHeight">20</x:Double>
+                </StackPanel.Resources>
+                <CheckBox x:Name="cbShowComplete" Content="Show Complete"/>
+                <CheckBox x:Name="cbShowPartial" Content="Show Partial"/>
+                <CheckBox x:Name="cbShowEmpty" Content="Show Empty"/>
+                <CheckBox x:Name="cbShowFix" Content="Show Fix"/>
+                <CheckBox x:Name="cbShowMIA" Content="Show MIA"/>
+                <CheckBox x:Name="cbShowMerged" Content="Show Merged/Deduped"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBox x:Name="tbFilter" Width="200" Margin="2"/>
+                    <Button x:Name="bReset" Content="X" Margin="2"/>
+                </StackPanel>
+            </StackPanel>
+            <!--
             <ContentControl Grid.Column="3" Grid.Row="0" Content="{Binding TopDat1}"/>
+            -->
             <ContentControl Grid.Column="3" Grid.Row="1" Content="{Binding GameGrid}"/>
             <TextBlock Grid.Column="3" Grid.Row="2" Text="{Binding Greeting1}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
