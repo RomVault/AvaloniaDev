@@ -6,7 +6,7 @@
              mc:Ignorable="d" d:DesignWidth="210" d:DesignHeight="160"
              x:DataType="vm:FilterViewModel"
              x:Class="AvaloniaApplication1.Views.FilterView">
-      <Design.DataContext>
+    <Design.DataContext>
         <vm:FilterViewModel/>
     </Design.DataContext>
     

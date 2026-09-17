@@ -11,14 +11,7 @@ namespace AvaloniaApplication1.ViewModels
     {
         public DatInfoViewModel TopDat { get; } = new();
         public DatInfoViewModel TopDat1 { get; } = new();
-
-        [ObservableProperty]
-        public partial string Greeting { get; set; } = "Tree View";
-
-        [ObservableProperty]
-        public partial string Greeting1 { get; set; } = "Rom View";
-
-
+        
         public FilterViewModel Filter { get; } = new();
 
         public GameGridViewModel GameGrid { get; } = new();

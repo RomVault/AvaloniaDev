@@ -22,10 +22,8 @@ namespace AvaloniaApplication1.Views
 
             ViewModel.TopDat.Description = "Hello";
             ViewModel.TopDat1.Description = "Hello 1";
-            ViewModel.Greeting = "Set Now";
 
             ViewModel.TopDat.SetValuesFromInput();
-
 
             ViewModel.GameGrid.Dats.Add(new DatNode("Hello", "ItWorked", DateTime.Now));
         }

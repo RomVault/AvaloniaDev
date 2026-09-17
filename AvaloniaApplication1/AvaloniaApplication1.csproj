@@ -24,9 +24,4 @@
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="Views\GameGrid.axaml.cs">
-      <DependentUpon>GameGrid.axaml</DependentUpon>
-    </Compile>
-  </ItemGroup>
 </Project>
