@@ -1,0 +1,39 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:AvaloniaApplication1.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="210" d:DesignHeight="160"
+             x:DataType="vm:FilterViewModel"
+             x:Class="AvaloniaApplication1.Views.FilterView">
+      <Design.DataContext>
+        <vm:FilterViewModel/>
+    </Design.DataContext>
+    
+    <StackPanel Grid.Column="3" Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Center">
+                <StackPanel.Resources> 
+                    <x:Double x:Key="CheckBoxMinHeight">20</x:Double>
+                </StackPanel.Resources>
+                <CheckBox x:Name="cbShowComplete" Content="Show Complete" IsChecked="{Binding bShowComplete}"/>
+                <CheckBox x:Name="cbShowPartial" Content="Show Partial" IsChecked="{Binding bShowPartial}"/>
+                <CheckBox x:Name="cbShowEmpty" Content="Show Empty" IsChecked="{Binding bShowEmpty}"/>
+                <CheckBox x:Name="cbShowFix" Content="Show Fix"/>
+                <CheckBox x:Name="cbShowMIA" Content="Show MIA"/>
+                <CheckBox x:Name="cbShowMerged" Content="Show Merged/Deduped"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBox x:Name="tbFilter"
+                             Width="180"
+                             Margin="0"
+                             MinHeight="0"
+                             Height="20"
+                             Padding="4,0"
+                             VerticalContentAlignment="Center"/>
+                    <Button x:Name="bReset"
+                            Margin="3"
+                             MinHeight="0"
+                             Height="22"
+                            Padding="4,1"
+                                Content="X" />
+                </StackPanel>
+            </StackPanel>
+</UserControl>

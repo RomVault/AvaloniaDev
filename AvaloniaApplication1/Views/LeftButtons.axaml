@@ -1,0 +1,69 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="100" d:DesignHeight="450"
+             x:Class="AvaloniaApplication1.Views.LeftButtons">
+
+    <UserControl.Styles>
+
+
+
+        <!-- Image buttons: no chrome, and the PNG swaps on IsEnabled.
+        Source is set here (not inline) so the :disabled rule can win. -->
+        <Style Selector="Button.ImageButton">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="1"/>
+        </Style>
+
+        <Style Selector="Button#bUpdate Image">
+            <Setter Property="Source" Value="avares://AvaloniaApplication1/Assets/btnUpdateDats_Enabled.png"/>
+        </Style>
+        <Style Selector="Button#bUpdate:disabled Image">
+            <Setter Property="Source" Value="avares://AvaloniaApplication1/Assets/btnUpdateDats_Disabled.png"/>
+        </Style>
+
+        <Style Selector="Button#bScan Image">
+            <Setter Property="Source" Value="avares://AvaloniaApplication1/Assets/btnScanRoms_Enabled.png"/>
+        </Style>
+        <Style Selector="Button#bScan:disabled Image">
+            <Setter Property="Source" Value="avares://AvaloniaApplication1/Assets/btnScanRoms_Disabled.png"/>
+        </Style>
+
+        <Style Selector="Button#bFindFix Image">
+            <Setter Property="Source" Value="avares://AvaloniaApplication1/Assets/btnFindFixes_Enabled.png"/>
+        </Style>
+        <Style Selector="Button#bFindFix:disabled Image">
+            <Setter Property="Source" Value="avares://AvaloniaApplication1/Assets/btnFindFixes_Disabled.png"/>
+        </Style>
+
+        <Style Selector="Button#bFix Image">
+            <Setter Property="Source" Value="avares://AvaloniaApplication1/Assets/btnFixFiles_Enabled.png"/>
+        </Style>
+        <Style Selector="Button#bFix:disabled Image">
+            <Setter Property="Source" Value="avares://AvaloniaApplication1/Assets/btnFixFiles_Disabled.png"/>
+        </Style>
+    </UserControl.Styles>
+
+
+
+    <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Vertical">
+        <Button x:Name="bUpdate" Classes="ImageButton" ToolTip.Tip="Update DAT">
+            <Image Stretch="Uniform"/>
+        </Button>
+        <Button x:Name="bScan" Classes="ImageButton" ToolTip.Tip="Scan">
+            <Image Stretch="Uniform"/>
+        </Button>
+        <Button x:Name="bFindFix" Classes="ImageButton" ToolTip.Tip="Find Fix">
+            <Image Stretch="Uniform"/>
+        </Button>
+        <Button x:Name="bFix" Classes="ImageButton" ToolTip.Tip="Fix">
+            <Image Stretch="Uniform"/>
+        </Button>
+
+
+    </StackPanel>
+
+
+</UserControl>

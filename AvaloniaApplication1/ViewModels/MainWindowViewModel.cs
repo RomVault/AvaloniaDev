@@ -1,10 +1,7 @@
-﻿
-
-using AvaloniaApplication1.Models;
+﻿using AvaloniaApplication1.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.ObjectModel;
-using System.Drawing;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -21,6 +18,8 @@ namespace AvaloniaApplication1.ViewModels
         [ObservableProperty]
         public partial string Greeting1 { get; set; } = "Rom View";
 
+
+        public FilterViewModel Filter { get; } = new();
 
         public GameGridViewModel GameGrid { get; } = new();
 
@@ -63,7 +62,7 @@ namespace AvaloniaApplication1.ViewModels
             TopDat1.Name = "Second DAT";
             TopDat1.Description = "Loaded at startup";
 
-            GameGrid.Dats.Add(new DatNode("Arcade", "System", DateTime.Now, "avares://AvaloniaApplication1/Assets/G_Correct.png", Avalonia.Media.Color.FromRgb(64,200,64)));
+            GameGrid.Dats.Add(new DatNode("Arcade", "System", DateTime.Now, "avares://AvaloniaApplication1/Assets/G_Correct.png", Avalonia.Media.Color.FromRgb(64, 200, 64)));
             GameGrid.Dats.Add(new DatNode("Capcom", "Manufacturer", DateTime.Now, "avares://AvaloniaApplication1/Assets/G_Correct.png", Avalonia.Media.Color.FromRgb(200, 32, 64)));
             GameGrid.Dats.Add(new DatNode("Konami", "Manufacturer", DateTime.Now));
             GameGrid.Dats.Add(new DatNode("Console", "System", DateTime.Now));

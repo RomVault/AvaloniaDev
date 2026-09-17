@@ -20,13 +20,6 @@
 
 
 
-        <!-- Image buttons: no chrome, and the PNG swaps on IsEnabled.
-        Source is set here (not inline) so the :disabled rule can win. -->
-        <Style Selector="Button.ImageButton">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Padding" Value="1"/>
-        </Style>
 
         <!-- Thin the tree rows.
         TreeViewItem itself floors at 32px via the TreeViewItemMinHeight
@@ -44,33 +37,6 @@
         </Style>
 
 
-        <Style Selector="Button#bUpdate Image">
-            <Setter Property="Source" Value="avares://AvaloniaApplication1/Assets/btnUpdateDats_Enabled.png"/>
-        </Style>
-        <Style Selector="Button#bUpdate:disabled Image">
-            <Setter Property="Source" Value="avares://AvaloniaApplication1/Assets/btnUpdateDats_Disabled.png"/>
-        </Style>
-
-        <Style Selector="Button#bScan Image">
-            <Setter Property="Source" Value="avares://AvaloniaApplication1/Assets/btnScanRoms_Enabled.png"/>
-        </Style>
-        <Style Selector="Button#bScan:disabled Image">
-            <Setter Property="Source" Value="avares://AvaloniaApplication1/Assets/btnScanRoms_Disabled.png"/>
-        </Style>
-
-        <Style Selector="Button#bFindFix Image">
-            <Setter Property="Source" Value="avares://AvaloniaApplication1/Assets/btnFindFixes_Enabled.png"/>
-        </Style>
-        <Style Selector="Button#bFindFix:disabled Image">
-            <Setter Property="Source" Value="avares://AvaloniaApplication1/Assets/btnFindFixes_Disabled.png"/>
-        </Style>
-
-        <Style Selector="Button#bFix Image">
-            <Setter Property="Source" Value="avares://AvaloniaApplication1/Assets/btnFixFiles_Enabled.png"/>
-        </Style>
-        <Style Selector="Button#bFix:disabled Image">
-            <Setter Property="Source" Value="avares://AvaloniaApplication1/Assets/btnFixFiles_Disabled.png"/>
-        </Style>
     </Window.Styles>
 
 
@@ -84,54 +50,17 @@
             ColumnSpacing="6"
             RowSpacing="6">
 
-            <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Vertical">
-                <Button x:Name="bUpdate" Classes="ImageButton" Click="bUpdate_Click" ToolTip.Tip="Update DAT">
-                    <Image Stretch="Uniform"/>
-                </Button>
-                <Button x:Name="bScan" Classes="ImageButton" ToolTip.Tip="Scan">
-                    <Image Stretch="Uniform"/>
-                </Button>
-                <Button x:Name="bFindFix" Classes="ImageButton" ToolTip.Tip="Find Fix">
-                    <Image Stretch="Uniform"/>
-                </Button>
-                <Button x:Name="bFix" Classes="ImageButton" ToolTip.Tip="Fix">
-                    <Image Stretch="Uniform"/>
-                </Button>
-
-
-            </StackPanel>
-
+            <views:LeftButtons Grid.Column="0" Grid.Row="0" Grid.RowSpan="3"/>
 
             <ContentControl Grid.Column="1" Grid.Row="0" Content="{Binding TopDat}"/>
 
             <views:RVTreeView Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Nodes="{Binding Tree}"/>
 
-            <!--
-            <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            -->
-
             <GridSplitter Grid.Column="2" ResizeDirection="Columns" Background="Gray" Width="4" Grid.RowSpan="3" ToolTip.Tip="Drag to resize the DAT tree"/>
 
-            <StackPanel Grid.Column="3" Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Center">
-                <StackPanel.Resources> 
-                    <x:Double x:Key="CheckBoxMinHeight">20</x:Double>
-                </StackPanel.Resources>
-                <CheckBox x:Name="cbShowComplete" Content="Show Complete"/>
-                <CheckBox x:Name="cbShowPartial" Content="Show Partial"/>
-                <CheckBox x:Name="cbShowEmpty" Content="Show Empty"/>
-                <CheckBox x:Name="cbShowFix" Content="Show Fix"/>
-                <CheckBox x:Name="cbShowMIA" Content="Show MIA"/>
-                <CheckBox x:Name="cbShowMerged" Content="Show Merged/Deduped"/>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <TextBox x:Name="tbFilter" Width="200" Margin="2"/>
-                    <Button x:Name="bReset" Content="X" Margin="2"/>
-                </StackPanel>
-            </StackPanel>
-            <!--
-            <ContentControl Grid.Column="3" Grid.Row="0" Content="{Binding TopDat1}"/>
-            -->
+            <ContentControl Grid.Column="3" Grid.Row="0" Content="{Binding Filter}"/>
+       
             <ContentControl Grid.Column="3" Grid.Row="1" Content="{Binding GameGrid}"/>
-            <TextBlock Grid.Column="3" Grid.Row="2" Text="{Binding Greeting1}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
 
 
