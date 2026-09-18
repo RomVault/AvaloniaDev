@@ -10,7 +10,7 @@
         <vm:GameInfoViewModel/>
     </Design.DataContext>
     <Grid
-        ColumnDefinitions="100,*,100,*"
+        ColumnDefinitions="100,*,140,*"
         RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto"
         ColumnSpacing="6"
         RowSpacing="-1">

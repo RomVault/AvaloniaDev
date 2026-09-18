@@ -46,24 +46,37 @@
 
         <Grid
             ColumnDefinitions="100,400,10,*"
-            RowDefinitions="160,*,*"
+            RowDefinitions="160,*"
             ColumnSpacing="6"
             RowSpacing="6">
 
-            <views:LeftButtons Grid.Column="0" Grid.Row="0" Grid.RowSpan="3"/>
+            <views:LeftButtons Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"/>
 
             <ContentControl Grid.Column="1" Grid.Row="0" Content="{Binding TopDat}"/>
+            <views:RVTreeView Grid.Column="1" Grid.Row="1" Nodes="{Binding Tree}"/>
 
-            <views:RVTreeView Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Nodes="{Binding Tree}"/>
+            <GridSplitter Grid.Column="2" Grid.Row="0" ResizeDirection="Columns" Background="Gray" Width="4" Grid.RowSpan="2" ToolTip.Tip="Drag to resize the DAT tree"/>
 
-            <GridSplitter Grid.Column="2" ResizeDirection="Columns" Background="Gray" Width="4" Grid.RowSpan="3" ToolTip.Tip="Drag to resize the DAT tree"/>
+            <Grid Grid.Column="3" Grid.Row="0"
+                  ColumnDefinitions="*,220"
+                  ColumnSpacing="6"
+                  RowDefinitions="*">
 
-            <ContentControl Grid.Column="3" Grid.Row="0" Content="{Binding TopGame}"/>
-       
-            <ContentControl Grid.Column="3" Grid.Row="1" Content="{Binding GameGrid}"/>
-     
-            <ContentControl Grid.Column="3" Grid.Row="2" Content="{Binding RomGrid}"/>
-     
+                <ContentControl Grid.Column="0" Grid.Row="0" Content="{Binding TopGame}"/>
+                <ContentControl Grid.Column="1" Grid.Row="0" Content="{Binding Filter}"/>
+            </Grid>
+
+            <Grid Grid.Column="3" Grid.Row="1"
+                  ColumnDefinitions="*"
+                  RowDefinitions="*,10,*"
+                  ColumnSpacing="6"
+                  >
+
+
+                <ContentControl Grid.Column="0" Grid.Row="0" Content="{Binding GameGrid}"/>
+                <GridSplitter Grid.Column="0" Grid.Row="1" ResizeDirection="Rows" Background="Gray" Height="4" ToolTip.Tip="Drag to resize"/>
+                <ContentControl Grid.Column="0" Grid.Row="2" Content="{Binding RomGrid}"/>
+            </Grid>
         </Grid>
 
 
