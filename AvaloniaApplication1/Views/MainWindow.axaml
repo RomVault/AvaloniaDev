@@ -58,9 +58,12 @@
 
             <GridSplitter Grid.Column="2" ResizeDirection="Columns" Background="Gray" Width="4" Grid.RowSpan="3" ToolTip.Tip="Drag to resize the DAT tree"/>
 
-            <ContentControl Grid.Column="3" Grid.Row="0" Content="{Binding Filter}" HorizontalAlignment="Right"/>
+            <ContentControl Grid.Column="3" Grid.Row="0" Content="{Binding TopGame}"/>
        
             <ContentControl Grid.Column="3" Grid.Row="1" Content="{Binding GameGrid}"/>
+     
+            <ContentControl Grid.Column="3" Grid.Row="2" Content="{Binding RomGrid}"/>
+     
         </Grid>
 
 

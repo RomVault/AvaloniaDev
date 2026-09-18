@@ -10,11 +10,13 @@ namespace AvaloniaApplication1.ViewModels
     public partial class MainWindowViewModel : ViewModelBase
     {
         public DatInfoViewModel TopDat { get; } = new();
-        public DatInfoViewModel TopDat1 { get; } = new();
+        public GameInfoViewModel TopGame { get; } = new();
         
         public FilterViewModel Filter { get; } = new();
 
         public GameGridViewModel GameGrid { get; } = new();
+
+        public RomGridViewModel RomGrid { get;  } = new();
 
         /// <summary>
         /// Root nodes of the check-box tree.
@@ -52,14 +54,8 @@ namespace AvaloniaApplication1.ViewModels
             progress.Report("Scanning ROMs...");
             await Task.Run(() => Thread.Sleep(100), cancellationToken);
 
-            TopDat1.Name = "Second DAT";
-            TopDat1.Description = "Loaded at startup";
-
-            GameGrid.Dats.Add(new DatNode("Arcade", "System", DateTime.Now, "avares://AvaloniaApplication1/Assets/G_Correct.png", Avalonia.Media.Color.FromRgb(64, 200, 64)));
-            GameGrid.Dats.Add(new DatNode("Capcom", "Manufacturer", DateTime.Now, "avares://AvaloniaApplication1/Assets/G_Correct.png", Avalonia.Media.Color.FromRgb(200, 32, 64)));
-            GameGrid.Dats.Add(new DatNode("Konami", "Manufacturer", DateTime.Now));
-            GameGrid.Dats.Add(new DatNode("Console", "System", DateTime.Now));
-            GameGrid.Dats.Add(new DatNode("Nintendo", "Manufacturer", DateTime.Now));
+//            TopDat1.Name = "Second DAT";
+//            TopDat1.Description = "Loaded at startup";
 
             progress.Report("Ready.");
         }

@@ -1,0 +1,64 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:AvaloniaApplication1.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="460" d:DesignHeight="130"
+             x:DataType="vm:GameInfoViewModel"
+             x:Class="AvaloniaApplication1.Views.GameInfoView">
+    <Design.DataContext>
+        <vm:GameInfoViewModel/>
+    </Design.DataContext>
+    <Grid
+        ColumnDefinitions="100,*,100,*"
+        RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto"
+        ColumnSpacing="6"
+        RowSpacing="-1">
+
+        <TextBlock Text="Name :" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <Border Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3" BorderBrush="White" BorderThickness="1">
+            <TextBlock Text="{Binding Name}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        </Border>
+
+        <TextBlock Text="Description :" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <Border Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3" BorderBrush="White" BorderThickness="1">
+            <TextBlock Text="{Binding Description}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        </Border>
+
+        <TextBlock Text="Manufacturer :" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <Border Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3" BorderBrush="White" BorderThickness="1">
+            <TextBlock Text="{Binding Manufacturer}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        </Border>
+
+        <TextBlock Text="Clone of :" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <Border Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="3" BorderBrush="White" BorderThickness="1">
+            <TextBlock Text="{Binding CloneOf}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        </Border>
+
+        <TextBlock Text="Rom of :" Grid.Column="0" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <Border Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="3" BorderBrush="White" BorderThickness="1">
+            <TextBlock Text="{Binding RomOf}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        </Border>
+
+        <TextBlock Text="Category :" Grid.Column="0" Grid.Row="5" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <Border Grid.Column="1" Grid.Row="5" BorderBrush="White" BorderThickness="1">
+            <TextBlock Text="{Binding Category}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        </Border>
+
+        <TextBlock Text="Serial / Game ID :" Grid.Column="2" Grid.Row="5" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <Border Grid.Column="3" Grid.Row="5" BorderBrush="White" BorderThickness="1">
+            <TextBlock Text="{Binding SerialGameId}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        </Border>
+
+        <TextBlock Text="Year :" Grid.Column="0" Grid.Row="6" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <Border Grid.Column="1" Grid.Row="6" BorderBrush="White" BorderThickness="1">
+            <TextBlock Text="{Binding Year}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        </Border>
+
+        <TextBlock Text="Version :" Grid.Column="2" Grid.Row="6" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <Border Grid.Column="3" Grid.Row="6" BorderBrush="White" BorderThickness="1">
+            <TextBlock Text="{Binding Version}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        </Border>
+
+    </Grid>
+</UserControl>

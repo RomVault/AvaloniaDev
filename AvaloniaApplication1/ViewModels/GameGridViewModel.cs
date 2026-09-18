@@ -1,5 +1,6 @@
 ﻿using AvaloniaApplication1.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
+using System;
 using System.Collections.ObjectModel;
 
 namespace AvaloniaApplication1.ViewModels
@@ -12,13 +13,13 @@ namespace AvaloniaApplication1.ViewModels
 
         public GameGridViewModel()
         {
-            // Image paths can be "avares://" resources (anything under Assets\)
-            // or absolute paths on disk.
-            //Dats.Add(new DatNode("Arcade", "System", 0,"avares://AvaloniaApplication1/Assets/G_Correct.png"));
 
-            //Dats.Add(new DatNode("Capcom", "Manufacturer", 120,null));
+            Dats.Add(new DatNode("Arcade", "System", DateTime.Now, "avares://AvaloniaApplication1/Assets/G_Correct.png", Avalonia.Media.Color.FromRgb(64, 200, 64)));
+            Dats.Add(new DatNode("Capcom", "Manufacturer", DateTime.Now, "avares://AvaloniaApplication1/Assets/G_Correct.png", Avalonia.Media.Color.FromRgb(200, 32, 64)));
+            Dats.Add(new DatNode("Konami", "Manufacturer", DateTime.Now));
+            Dats.Add(new DatNode("Console", "System", DateTime.Now));
+            Dats.Add(new DatNode("Nintendo", "Manufacturer", DateTime.Now));
 
-            //Dats.Add(new DatNode("Konami", "Manufacturer", 98,null));
         }
     }
 }

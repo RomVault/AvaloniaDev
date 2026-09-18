@@ -21,7 +21,7 @@ namespace AvaloniaApplication1.Views
                 return;
 
             ViewModel.TopDat.Description = "Hello";
-            ViewModel.TopDat1.Description = "Hello 1";
+          //  ViewModel.TopDat1.Description = "Hello 1";
 
             ViewModel.TopDat.SetValuesFromInput();
 

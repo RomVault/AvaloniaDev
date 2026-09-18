@@ -1,0 +1,66 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:AvaloniaApplication1.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="vm:RomGridViewModel"
+             x:Class="AvaloniaApplication1.Views.RomGridView">
+    <Design.DataContext>
+        <vm:RomGridViewModel/>
+    </Design.DataContext>
+
+    <DataGrid ItemsSource="{Binding Roms}"
+              x:Name="RomsGrid"
+              x:CompileBindings="False"
+              AutoGenerateColumns="False"
+              CanUserResizeColumns="True"
+              IsReadOnly="True"
+              GridLinesVisibility="All"
+              SelectionMode="Single"
+              Height="300"
+              RowHeight="19"
+              ColumnHeaderHeight="25"
+              Margin="0,0,0,0">
+        <DataGrid.ContextMenu>
+            <ContextMenu Opening="ContextMenu_Opening">
+                <MenuItem Header="Open Dir" Click="OpenDir_Click"/>
+            </ContextMenu>
+        </DataGrid.ContextMenu>
+        <DataGrid.Styles>
+            <Style Selector="DataGridRow">
+                <Setter Property="Background" Value="{Binding BgBrush}"/>
+            </Style>
+            <Style Selector="DataGridCell">
+                <Setter Property="Background" Value="Transparent"/>
+            </Style>
+        </DataGrid.Styles>
+        <DataGrid.Columns>
+            <DataGridTemplateColumn Header="Got" Width="65">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <Image Source="{Binding rGot}"
+                               Height="16"
+                               Stretch="Uniform"
+                               Margin="0"/>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTextColumn Header="ROM (File)" Binding="{Binding rRom}" Width="150"/>
+            <DataGridTextColumn Header="Merge" Binding="{Binding rMerge}" Width="60"/>
+            <DataGridTextColumn Header="Size" Binding="{Binding rSize}" Width="60"/>
+            <DataGridTextColumn Header="CRC32" Binding="{Binding rCRC32}" Width="175"/>
+            <DataGridTextColumn Header="SHA1" Binding="{Binding rSHA1}" Width="150"/>
+            <DataGridTextColumn Header="MD5" Binding="{Binding rMD5}" Width="150"/>
+            <DataGridTextColumn Header="AltSize" Binding="{Binding rAltSize}" Width="60" IsVisible="False"/>
+            <DataGridTextColumn Header="AltCRC32" Binding="{Binding rAltCRC32}" Width="175" IsVisible="False"/>
+            <DataGridTextColumn Header="AltSHA1" Binding="{Binding rAltSHA1}" Width="150" IsVisible="False"/>
+            <DataGridTextColumn Header="AltMD5" Binding="{Binding rAltMD5}" Width="150" IsVisible="False"/>
+            <DataGridTextColumn Header="Status" Binding="{Binding rStatus}" Width="175"/>
+            <DataGridTextColumn Header="Modified Date/Time" Binding="{Binding rFileModDate}" Width="175"/>
+            <DataGridTextColumn Header="ZipIndex" Binding="{Binding rZipIndex}" Width="175"/>
+            <DataGridTextColumn Header="Instance Count" Binding="{Binding rInstanceCount}" Width="125"/>
+        </DataGrid.Columns>
+    </DataGrid>
+
+</UserControl>
