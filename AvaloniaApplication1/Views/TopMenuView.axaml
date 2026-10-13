@@ -11,16 +11,27 @@
     </Design.DataContext>
     <Menu>
         <MenuItem Header="Update DATs">
-            <MenuItem Header="Update All" Command="{Binding UpdateAllCommand}"/>
-            <MenuItem Header="Refresh All" Command="{Binding RefreshAllCommand}"/>
+            <MenuItem Header="DATVault Update" Command="{Binding DATVaultUpdateCommand}"/>
+            <MenuItem Header="Update New DATs" Command="{Binding UpdateNewDATsCommand}"/>
+            <MenuItem Header="Refresh All DATs" Command="{Binding RefreshAllDATsCommand}"/>
+            <MenuItem Header="Update MIA" Command="{Binding UpdateMIACommand}"/>
         </MenuItem>
-        <MenuItem Header="Scan ROMs" Command="{Binding ScanRomsCommand}"/>
+        <MenuItem Header="Scan ROMs">
+            <MenuItem Header="Scan ticked new ROMs headers only" Command="{Binding ScanRomsLevel1Command}"/>
+            <MenuItem Header="Scan ticked new ROMs with full hash check" Command="{Binding ScanRomsLevel2Command}"/>
+            <MenuItem Header="ReScan all ticked ROMs with full hash check" Command="{Binding ScanRomsLevel3Command}"/>
+        </MenuItem>
         <MenuItem Header="Find Fixes" Command="{Binding FindFixesCommand}"/>
         <MenuItem Header="Fix ROMs" Command="{Binding FixRomsCommand}"/>
-        <MenuItem Header="Reports" Command="{Binding ReportsCommand}"/>
+        <MenuItem Header="Reports">
+            <MenuItem Header="Fix Dat Report" Command="{Binding FixDatReportCommand}"/>
+            <MenuItem Header="Full Report" Command="{Binding FullReportCommand}"/>
+            <MenuItem Header="Fix Report" Command="{Binding FixReportCommand}"/>
+        </MenuItem>
         <MenuItem Header="Settings" Command="{Binding SettingsCommand}"/>
         <MenuItem Header="Add ToSort" Command="{Binding AddToSortCommand}"/>
-        <MenuItem Header="Help" Command="{Binding HelpCommand}"/>
-
+        <MenuItem Header="Help">
+            <MenuItem Header="Icon Key" Command="{Binding IconKeyCommand}"/>
+        </MenuItem>
     </Menu>
 </UserControl>

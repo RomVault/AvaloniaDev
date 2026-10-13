@@ -1,3 +1,4 @@
+using AvaloniaApplication1.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Diagnostics;
@@ -11,30 +12,67 @@ namespace AvaloniaApplication1.ViewModels
         /// menu items grey out.
         /// </summary>
         [ObservableProperty]
-        [NotifyCanExecuteChangedFor(nameof(UpdateAllCommand))]
-        [NotifyCanExecuteChangedFor(nameof(RefreshAllCommand))]
-        [NotifyCanExecuteChangedFor(nameof(ScanRomsCommand))]
+        [NotifyCanExecuteChangedFor(nameof(DATVaultUpdateCommand))]
+        [NotifyCanExecuteChangedFor(nameof(UpdateNewDATsCommand))]
+        [NotifyCanExecuteChangedFor(nameof(RefreshAllDATsCommand))]
+        [NotifyCanExecuteChangedFor(nameof(UpdateMIACommand))]
+        [NotifyCanExecuteChangedFor(nameof(ScanRomsLevel1Command))]
+        [NotifyCanExecuteChangedFor(nameof(ScanRomsLevel2Command))]
+        [NotifyCanExecuteChangedFor(nameof(ScanRomsLevel3Command))]
         [NotifyCanExecuteChangedFor(nameof(FindFixesCommand))]
         [NotifyCanExecuteChangedFor(nameof(FixRomsCommand))]
+        [NotifyCanExecuteChangedFor(nameof(FixDatReportCommand))]
+        [NotifyCanExecuteChangedFor(nameof(FullReportCommand))]
+        [NotifyCanExecuteChangedFor(nameof(FixReportCommand))]
         [NotifyCanExecuteChangedFor(nameof(AddToSortCommand))]
         public partial bool IsIdle { get; set; } = true;
 
         [RelayCommand(CanExecute = nameof(IsIdle))]
-        private void UpdateAll()
+        private void DATVaultUpdate()
         {
             // TODO: replace with the real DAT update.
-            Debug.WriteLine("Update All requested.");
+            Debug.WriteLine("DATVault Update requested.");
         }
 
         [RelayCommand(CanExecute = nameof(IsIdle))]
-        private void RefreshAll()
+        private void UpdateNewDATs()
         {
-            // TODO: replace with the real DAT refresh.
-            Debug.WriteLine("Refresh All requested.");
+            // TODO: replace with the real DAT update.
+            Debug.WriteLine("Update New DATs requested.");
         }
 
         [RelayCommand(CanExecute = nameof(IsIdle))]
-        private void ScanRoms()
+        private void RefreshAllDATs()
+        {
+            // TODO: replace with the real DAT update.
+            Debug.WriteLine("Refresh All DATs requested.");
+        }
+
+        [RelayCommand(CanExecute = nameof(IsIdle))]
+        private void UpdateMIA()
+        {
+            // TODO: replace with the real DAT update.
+            Debug.WriteLine("Update MIA requested.");
+        }
+
+
+
+
+
+        [RelayCommand(CanExecute = nameof(IsIdle))]
+        private void ScanRomsLevel1()
+        {
+            // TODO: replace with the real ROM scan.
+            Debug.WriteLine("Scan ROMs requested.");
+        }
+        [RelayCommand(CanExecute = nameof(IsIdle))]
+        private void ScanRomsLevel2()
+        {
+            // TODO: replace with the real ROM scan.
+            Debug.WriteLine("Scan ROMs requested.");
+        }
+        [RelayCommand(CanExecute = nameof(IsIdle))]
+        private void ScanRomsLevel3()
         {
             // TODO: replace with the real ROM scan.
             Debug.WriteLine("Scan ROMs requested.");
@@ -55,19 +93,33 @@ namespace AvaloniaApplication1.ViewModels
         }
 
         [RelayCommand(CanExecute = nameof(IsIdle))]
+        private void FixDatReport()
+        {
+            // TODO: replace with the real fix operation.
+            Debug.WriteLine("Fix Dat Report requested.");
+        }
+
+        [RelayCommand(CanExecute = nameof(IsIdle))]
+        private void FullReport()
+        {
+            // TODO: replace with the real fix operation.
+            Debug.WriteLine("Full Report requested.");
+        }
+        [RelayCommand(CanExecute = nameof(IsIdle))]
+        private void FixReport()
+        {
+            // TODO: replace with the real fix operation.
+            Debug.WriteLine("Fix Report requested.");
+        }
+
+
+
+        [RelayCommand(CanExecute = nameof(IsIdle))]
         private void AddToSort()
         {
             // TODO: replace with the real ToSort directory add.
             Debug.WriteLine("Add ToSort requested.");
         }
-
-        [RelayCommand]
-        private void Reports()
-        {
-            // TODO: replace with the real report display.
-            Debug.WriteLine("Reports requested.");
-        }
-
         [RelayCommand]
         private void Settings()
         {
@@ -75,11 +127,23 @@ namespace AvaloniaApplication1.ViewModels
             Debug.WriteLine("Settings requested.");
         }
 
+        private IconKeyView? _iconKeyView;
+
         [RelayCommand]
-        private void Help()
+        private void IconKey()
         {
-            // TODO: replace with the real help display.
-            Debug.WriteLine("Help requested.");
+            if (_iconKeyView == null)
+            {
+                _iconKeyView = new IconKeyView();
+                _iconKeyView.Closed += (s, e) => _iconKeyView = null;
+                _iconKeyView.Show();
+            }
+            else
+            {
+                _iconKeyView.Activate();
+            }
         }
+
+
     }
 }

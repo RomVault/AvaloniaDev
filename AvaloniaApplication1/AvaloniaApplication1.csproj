@@ -52,6 +52,9 @@
     <Compile Update="Views\TopMenuView.axaml.cs">
       <DependentUpon>TopMenuView.axaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\IconKeyView.axaml.cs">
+      <DependentUpon>IconKeyView.axaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
 </Project>
