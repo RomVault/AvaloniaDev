@@ -9,34 +9,27 @@ namespace AvaloniaApplication1.ViewModels
 {
     public partial class MainWindowViewModel : ViewModelBase
     {
+        public TopMenuViewModel TopMenu { get; } = new();
+        public LeftButtonsViewModel LeftButtons { get; } = new();
+
         public DatInfoViewModel TopDat { get; } = new();
-        public GameInfoViewModel TopGame { get; } = new();
-        
+        public GameInfoViewModel TopGame { get; } = new();        
         public FilterViewModel Filter { get; } = new();
 
-        public GameGridViewModel GameGrid { get; } = new();
+        public RVTreeViewModel Tree { get; } = new();
 
+        public GameGridViewModel GameGrid { get; } = new();
         public RomGridViewModel RomGrid { get;  } = new();
+
 
         /// <summary>
         /// Root nodes of the check-box tree.
         /// </summary>
-        public ObservableCollection<TreeNodeViewModel> Tree { get; } = new();
+       
 
         public MainWindowViewModel()
         {
-            const string icon = "avares://AvaloniaApplication1/Assets/G_Correct.png";
-
-            var arcade = new TreeNodeViewModel("RomRoot", false, icon);
-            arcade.Children.Add(new TreeNodeViewModel("Capcom", true, icon));
-            arcade.Children.Add(new TreeNodeViewModel("Konami", false, icon));
-
-            var console = new TreeNodeViewModel("ToSort", false, icon);
-            console.Children.Add(new TreeNodeViewModel("Nintendo", false, icon));
-            console.Children.Add(new TreeNodeViewModel("Sega", true, icon));
-
-            Tree.Add(arcade);
-            Tree.Add(console);
+           
         }
 
         /// <summary>

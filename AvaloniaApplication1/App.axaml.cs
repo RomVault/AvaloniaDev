@@ -80,7 +80,7 @@ namespace AvaloniaApplication1
                 return;
             }
 
-            var mainWindow = new MainWindow { DataContext = viewModel };
+            var mainWindow = new MainWindowView { DataContext = viewModel };
 
             desktop.MainWindow = mainWindow;
             desktop.ShutdownMode = ShutdownMode.OnMainWindowClose;

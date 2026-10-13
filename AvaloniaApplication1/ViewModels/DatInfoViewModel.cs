@@ -38,12 +38,5 @@ namespace AvaloniaApplication1.ViewModels
         [ObservableProperty]
         public partial string ROMsTotal { get; set; } = "0";
 
-
-        public void SetValuesFromInput()
-        {
-            Name = "Hello 1";
-            Description = "From RV";
-            Category = "Category 1";
-        }
     }
 }

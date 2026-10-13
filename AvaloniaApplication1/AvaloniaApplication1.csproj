@@ -24,4 +24,34 @@
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Views\DatInfoView.axaml.cs">
+      <DependentUpon>DatInfoView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\FilterView.axaml.cs">
+      <DependentUpon>FilterView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\GameGridView.axaml.cs">
+      <DependentUpon>GameGridView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\GameInfoView.axaml.cs">
+      <DependentUpon>GameInfoView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\LeftButtonsView.axaml.cs">
+      <DependentUpon>LeftButtonsView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\MainWindowView.axaml.cs">
+      <DependentUpon>MainWindowView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\RomGridView.axaml.cs">
+      <DependentUpon>RomGridView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\RVTreeView.axaml.cs">
+      <DependentUpon>RVTreeView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\TopMenuView.axaml.cs">
+      <DependentUpon>TopMenuView.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
 </Project>

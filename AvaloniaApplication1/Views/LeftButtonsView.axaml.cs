@@ -4,9 +4,9 @@ using Avalonia.Markup.Xaml;
 
 namespace AvaloniaApplication1.Views;
 
-public partial class LeftButtons : UserControl
+public partial class LeftButtonsView : UserControl
 {
-    public LeftButtons()
+    public LeftButtonsView()
     {
         InitializeComponent();
     }

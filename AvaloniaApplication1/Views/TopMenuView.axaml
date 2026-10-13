@@ -1,0 +1,26 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:AvaloniaApplication1.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="30"
+             x:DataType="vm:TopMenuViewModel"
+             x:Class="AvaloniaApplication1.Views.TopMenuView">
+    <Design.DataContext>
+        <vm:TopMenuViewModel/>
+    </Design.DataContext>
+    <Menu>
+        <MenuItem Header="Update DATs">
+            <MenuItem Header="Update All" Command="{Binding UpdateAllCommand}"/>
+            <MenuItem Header="Refresh All" Command="{Binding RefreshAllCommand}"/>
+        </MenuItem>
+        <MenuItem Header="Scan ROMs" Command="{Binding ScanRomsCommand}"/>
+        <MenuItem Header="Find Fixes" Command="{Binding FindFixesCommand}"/>
+        <MenuItem Header="Fix ROMs" Command="{Binding FixRomsCommand}"/>
+        <MenuItem Header="Reports" Command="{Binding ReportsCommand}"/>
+        <MenuItem Header="Settings" Command="{Binding SettingsCommand}"/>
+        <MenuItem Header="Add ToSort" Command="{Binding AddToSortCommand}"/>
+        <MenuItem Header="Help" Command="{Binding HelpCommand}"/>
+
+    </Menu>
+</UserControl>

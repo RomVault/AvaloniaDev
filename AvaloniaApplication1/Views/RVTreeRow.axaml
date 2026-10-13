@@ -1,0 +1,25 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:AvaloniaApplication1.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             x:DataType="vm:RVTreeViewModel"
+             x:Class="AvaloniaApplication1.Views.RVTreeRow">
+
+    <StackPanel Orientation="Horizontal" Spacing="2">
+        <CheckBox IsChecked="{Binding IsChecked}" VerticalAlignment="Top"/>
+        <Image Source="{Binding Icon}" Width="12" Height="12" Stretch="Uniform" VerticalAlignment="Top"/>
+        <StackPanel Orientation="Vertical">
+            <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
+
+            <ItemsControl ItemsSource="{Binding extraInfo}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="x:String">
+                        <TextBlock Text="{Binding}"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+        </StackPanel>
+    </StackPanel>
+</UserControl>

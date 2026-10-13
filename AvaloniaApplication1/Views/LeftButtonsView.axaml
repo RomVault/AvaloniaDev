@@ -2,8 +2,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:AvaloniaApplication1.ViewModels"
              mc:Ignorable="d" d:DesignWidth="100" d:DesignHeight="450"
-             x:Class="AvaloniaApplication1.Views.LeftButtons">
+             x:DataType="vm:LeftButtonsViewModel"
+             x:Class="AvaloniaApplication1.Views.LeftButtonsView">
+
+    <Design.DataContext>
+        <vm:LeftButtonsViewModel/>
+    </Design.DataContext>
 
     <UserControl.Styles>
 
@@ -49,16 +55,16 @@
 
 
     <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Vertical">
-        <Button x:Name="bUpdate" Classes="ImageButton" ToolTip.Tip="Update DAT">
+        <Button x:Name="bUpdate" Classes="ImageButton" ToolTip.Tip="Update DAT" Command="{Binding UpdateDatsCommand}">
             <Image Stretch="Uniform"/>
         </Button>
-        <Button x:Name="bScan" Classes="ImageButton" ToolTip.Tip="Scan">
+        <Button x:Name="bScan" Classes="ImageButton" ToolTip.Tip="Scan" Command="{Binding ScanRomsCommand}">
             <Image Stretch="Uniform"/>
         </Button>
-        <Button x:Name="bFindFix" Classes="ImageButton" ToolTip.Tip="Find Fix">
+        <Button x:Name="bFindFix" Classes="ImageButton" ToolTip.Tip="Find Fix" Command="{Binding FindFixesCommand}">
             <Image Stretch="Uniform"/>
         </Button>
-        <Button x:Name="bFix" Classes="ImageButton" ToolTip.Tip="Fix">
+        <Button x:Name="bFix" Classes="ImageButton" ToolTip.Tip="Fix" Command="{Binding FixFilesCommand}">
             <Image Stretch="Uniform"/>
         </Button>
 

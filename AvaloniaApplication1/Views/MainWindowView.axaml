@@ -1,12 +1,10 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:AvaloniaApplication1.ViewModels"
-        xmlns:local="using:AvaloniaApplication1"
-        xmlns:views="using:AvaloniaApplication1.Views"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="AvaloniaApplication1.Views.MainWindow"
+        x:Class="AvaloniaApplication1.Views.MainWindowView"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
         Title="AvaloniaApplication1">
@@ -41,21 +39,26 @@
 
 
     <DockPanel>
-        <views:TopMenu DockPanel.Dock="Top"/>
+        <ContentControl DockPanel.Dock="Top" Content="{Binding TopMenu}"/>
 
 
-        <Grid
-            ColumnDefinitions="100,400,10,*"
-            RowDefinitions="160,*"
-            ColumnSpacing="6"
-            RowSpacing="6">
+        <Grid RowDefinitions="160,*" ColumnSpacing="6" RowSpacing="6">
 
-            <views:LeftButtons Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="400" MinWidth="300"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="*" MinWidth="100"/>
+            </Grid.ColumnDefinitions>
+
+
+            <ContentControl Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Content="{Binding LeftButtons}"/>
 
             <ContentControl Grid.Column="1" Grid.Row="0" Content="{Binding TopDat}"/>
-            <views:RVTreeView Grid.Column="1" Grid.Row="1" Nodes="{Binding Tree}"/>
-
-            <GridSplitter Grid.Column="2" Grid.Row="0" ResizeDirection="Columns" Background="Gray" Width="4" Grid.RowSpan="2" ToolTip.Tip="Drag to resize the DAT tree"/>
+            
+            <ContentControl Grid.Column="1" Grid.Row="1" Content="{Binding Tree}"/>
+            
+            <GridSplitter Grid.Column="2" Grid.Row="0" ResizeDirection="Columns" Background="DarkGray" Width="4" Grid.RowSpan="2" ToolTip.Tip="Drag to resize the DAT tree"/>
 
             <Grid Grid.Column="3" Grid.Row="0"
                   ColumnDefinitions="*,220"
@@ -66,15 +69,16 @@
                 <ContentControl Grid.Column="1" Grid.Row="0" Content="{Binding Filter}"/>
             </Grid>
 
-            <Grid Grid.Column="3" Grid.Row="1"
-                  ColumnDefinitions="*"
-                  RowDefinitions="*,10,*"
-                  ColumnSpacing="6"
-                  >
+            <Grid Grid.Column="3" Grid.Row="1" ColumnDefinitions="*" ColumnSpacing="6">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" MinHeight="80"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="*" MinHeight="80"/>
+                </Grid.RowDefinitions>
 
 
                 <ContentControl Grid.Column="0" Grid.Row="0" Content="{Binding GameGrid}"/>
-                <GridSplitter Grid.Column="0" Grid.Row="1" ResizeDirection="Rows" Background="Gray" Height="4" ToolTip.Tip="Drag to resize"/>
+                <GridSplitter Grid.Column="0" Grid.Row="1" ResizeDirection="Rows" Background="DarkGray" Height="4" ToolTip.Tip="Drag to resize"/>
                 <ContentControl Grid.Column="0" Grid.Row="2" Content="{Binding RomGrid}"/>
             </Grid>
         </Grid>

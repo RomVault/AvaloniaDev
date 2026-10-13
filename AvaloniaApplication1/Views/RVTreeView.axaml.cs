@@ -13,24 +13,12 @@ namespace AvaloniaApplication1.Views;
 
 public partial class RVTreeView : UserControl
 {
-    public static readonly StyledProperty<IEnumerable?> NodesProperty =
-        AvaloniaProperty.Register<RVTreeView, IEnumerable?>(nameof(Nodes));
-
-    /// <summary>
-    /// The tree nodes to display. Bind this to a collection of TreeNodeViewModel.
-    /// </summary>
-    public IEnumerable? Nodes
-    {
-        get => GetValue(NodesProperty);
-        set => SetValue(NodesProperty, value);
-    }
-
     /// <summary>
     /// The node under the pointer when the context menu was requested.
     /// Right-clicking does not change TreeView.SelectedItem, so we capture
     /// the row ourselves on the press that opens the menu.
     /// </summary>
-    private TreeNodeViewModel? _clickedNode;
+    private RVTreeViewModel? _clickedNode;
 
     public RVTreeView()
     {
@@ -44,12 +32,12 @@ public partial class RVTreeView : UserControl
     {
         // Walk up from whatever was hit to the owning row, then take its data item.
         TreeViewItem? row = (e.Source as Visual)?.FindAncestorOfType<TreeViewItem>(includeSelf: true);
-        _clickedNode = row?.DataContext as TreeNodeViewModel;
+        _clickedNode = row?.DataContext as RVTreeViewModel;
     }
 
     private void ContextMenu_Opening(object? sender, CancelEventArgs e)
     {
-        TreeNodeViewModel? node = _clickedNode;
+        RVTreeViewModel? node = _clickedNode;
 
         // Clicked empty space below the tree: nothing to act on.
         if (node is null)

@@ -1,13 +1,15 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="using:AvaloniaApplication1.ViewModels"
+             xmlns:views="using:AvaloniaApplication1.Views"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="450"
+             x:DataType="vm:RVTreeViewModel"
              x:Class="AvaloniaApplication1.Views.RVTreeView"
              x:Name="Root">
 
-    <TreeView ItemsSource="{Binding #Root.Nodes}">
+    <TreeView ItemsSource="{Binding Children}">
         <TreeView.ContextMenu>
             <ContextMenu Opening="ContextMenu_Opening">
                 <MenuItem x:Name="miScan1" Header="Scan1" Click="Scan1_Click"/>
@@ -25,16 +27,8 @@
         </TreeView.Resources>
 
         <TreeView.ItemTemplate>
-            <TreeDataTemplate x:DataType="vm:TreeNodeViewModel" ItemsSource="{Binding Children}">
-                <StackPanel Orientation="Horizontal" Spacing="2">
-                    <CheckBox IsChecked="{Binding IsChecked}"/>
-                    <Image Source="{Binding Icon}"
-                           Width="12"
-                           Height="12"
-                           Stretch="Uniform"
-                           VerticalAlignment="Center"/>
-                    <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
-                </StackPanel>
+            <TreeDataTemplate x:DataType="vm:RVTreeViewModel" ItemsSource="{Binding Children}">
+                <views:RVTreeRow/>
             </TreeDataTemplate>
         </TreeView.ItemTemplate>
     </TreeView>

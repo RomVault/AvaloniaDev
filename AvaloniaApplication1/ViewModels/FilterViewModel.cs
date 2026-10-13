@@ -1,5 +1,6 @@
 ﻿
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace AvaloniaApplication1.ViewModels
 {
@@ -12,5 +13,23 @@ namespace AvaloniaApplication1.ViewModels
 
         [ObservableProperty]
         public partial bool bShowEmpty { get; set; } = true;
+
+        [ObservableProperty]
+        public partial bool bShowFix { get; set; } = true;
+
+        [ObservableProperty]
+        public partial bool bShowMIA { get; set; } = true;
+
+        [ObservableProperty]
+        public partial bool bShowMerged { get; set; } = true;
+
+        [ObservableProperty]
+        public partial string FilterText { get; set; } = "";
+
+        [RelayCommand]
+        private void ResetFilter()
+        {
+            FilterText = "";
+        }
     }
 }
