@@ -30,17 +30,5 @@ namespace AvaloniaApplication1.Models
                 return null;
             }
         }
-
-        public static IEnumerable<Bitmap> LoadAll(IEnumerable<string> paths)
-        {
-            foreach (var path in paths)
-            {
-                var bitmap = Load(path);
-                if (bitmap is not null)
-                {
-                    yield return bitmap;
-                }
-            }
-        }
     }
 }

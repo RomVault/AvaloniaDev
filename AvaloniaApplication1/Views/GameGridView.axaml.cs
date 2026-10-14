@@ -43,8 +43,8 @@ public partial class GameGridView : UserControl
     /// <summary>
     /// The row that was right-clicked, or null if the click was not on a row.
     /// </summary>
-    private DatNode? SelectedNode =>
-        this.FindControl<DataGrid>("GamesGrid")?.SelectedItem as DatNode;
+    private GameNode? SelectedNode =>
+        this.FindControl<DataGrid>("GamesGrid")?.SelectedItem as GameNode;
 
     private void Scan1_Click(object? sender, RoutedEventArgs e)
     {
@@ -57,7 +57,7 @@ public partial class GameGridView : UserControl
     /// </summary>
     private void RunScan(int level)
     {
-        DatNode? node = SelectedNode;
+        GameNode? node = SelectedNode;
         if (node is null)
         {
             return;

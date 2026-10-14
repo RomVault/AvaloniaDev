@@ -75,12 +75,29 @@ public partial class RVTreeView : UserControl
         RunScan(3);
     }
 
-    private void RunScan(int level)
+    private void TreeView_SelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
-        if (_clickedNode is null)
+        if (e.AddedItems.Count == 0)
         {
             return;
         }
+
+        if (e.AddedItems[0] is not RVTreeViewModel selected)
+        {
+            return;
+        }
+
+        // The root view model (the DataContext) owns the RowSelected event.
+        if (DataContext is RVTreeViewModel root)
+        {
+            root.OnRowSelected(selected);
+        }
+    }
+
+    private void RunScan(int level)
+    {
+        if (_clickedNode is null)
+            return;
 
         // TODO: replace with the real scan once the scanning service exists.
         Debug.WriteLine($"Scan{level} requested for tree node '{_clickedNode.Name}'.");

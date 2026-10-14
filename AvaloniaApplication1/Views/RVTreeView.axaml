@@ -9,7 +9,8 @@
              x:Class="AvaloniaApplication1.Views.RVTreeView"
              x:Name="Root">
 
-    <TreeView ItemsSource="{Binding Children}">
+    <TreeView ItemsSource="{Binding Children}" SelectionChanged="TreeView_SelectionChanged"
+              ScrollViewer.HorizontalScrollBarVisibility="Disabled">
         <TreeView.ContextMenu>
             <ContextMenu Opening="ContextMenu_Opening">
                 <MenuItem x:Name="miScan1" Header="Scan1" Click="Scan1_Click"/>

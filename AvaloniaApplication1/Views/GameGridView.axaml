@@ -10,7 +10,7 @@
         <vm:GameGridViewModel/>
     </Design.DataContext>
 
-        <DataGrid ItemsSource="{Binding Dats}"
+        <DataGrid ItemsSource="{Binding Games}"
                   x:Name="GamesGrid"
                   x:CompileBindings="False"
                   AutoGenerateColumns="False" 

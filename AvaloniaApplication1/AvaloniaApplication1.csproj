@@ -25,6 +25,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\RVWorldPublic\Libraries\RVUtils\RVUtils.csproj" />
+    <ProjectReference Include="..\..\RVWorldPublic\RomVaultCore\RomVaultCore.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Views\DatInfoView.axaml.cs">
       <DependentUpon>DatInfoView.axaml</DependentUpon>
     </Compile>

@@ -4,9 +4,9 @@ using System;
 
 namespace AvaloniaApplication1.Models
 {
-    public class DatNode
+    public class GameNode
     {
-        public DatNode(string name, string description, DateTime dTime, string? imagePath = null, Color? backColor = null)
+        public GameNode(string name, string description, DateTime dTime, string? imagePath = null, Color? backColor = null)
         {
             gName = name;
             gDescription = description;
