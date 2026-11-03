@@ -30,6 +30,24 @@ public partial class GameGridView : UserControl
         _shiftOnPress = e.KeyModifiers.HasFlag(KeyModifiers.Shift);
     }
 
+    private void GamesGrid_SelectionChanged(object? sender, SelectionChangedEventArgs e)
+    {
+        if (e.AddedItems.Count == 0)
+        {
+            return;
+        }
+
+        if (e.AddedItems[0] is not GameNode selected)
+        {
+            return;
+        }
+
+        if (DataContext is ViewModels.GameGridViewModel vm)
+        {
+            vm.OnRowSelected(selected.gFile);
+        }
+    }
+
     private void ContextMenu_Opening(object? sender, CancelEventArgs e)
     {
         // Right-click alone does nothing; Shift + right-click opens the menu.

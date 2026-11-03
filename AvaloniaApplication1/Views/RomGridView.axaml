@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:AvaloniaApplication1.ViewModels"
+             xmlns:controls="clr-namespace:AvaloniaApplication1.Controls"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:DataType="vm:RomGridViewModel"
              x:Class="AvaloniaApplication1.Views.RomGridView">
@@ -18,7 +19,8 @@
               IsReadOnly="True"
               GridLinesVisibility="All"
               SelectionMode="Single"
-              RowHeight="19"
+              FontSize="10"
+              RowHeight="18"
               ColumnHeaderHeight="25"
               Margin="0,0,0,0">
         <DataGrid.ContextMenu>
@@ -29,6 +31,7 @@
         <DataGrid.Styles>
             <Style Selector="DataGridRow">
                 <Setter Property="Background" Value="{Binding BgBrush}"/>
+                <Setter Property="Foreground" Value="{Binding FgBrush}"/>
             </Style>
             <Style Selector="DataGridCell">
                 <Setter Property="Background" Value="Transparent"/>
@@ -38,14 +41,11 @@
             <DataGridTemplateColumn Header="Got" Width="65">
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
-                        <Image Source="{Binding rGot}"
-                               Height="16"
-                               Stretch="Uniform"
-                               Margin="0"/>
+                        <controls:RomTypeCell Node="{Binding}"/>
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
-            <DataGridTextColumn Header="ROM (File)" Binding="{Binding rRom}" Width="150"/>
+            <DataGridTextColumn Header="ROM (File)" Binding="{Binding rName}" Width="150"/>
             <DataGridTextColumn Header="Merge" Binding="{Binding rMerge}" Width="60"/>
             <DataGridTextColumn Header="Size" Binding="{Binding rSize}" Width="60"/>
             <DataGridTextColumn Header="CRC32" Binding="{Binding rCRC32}" Width="175"/>

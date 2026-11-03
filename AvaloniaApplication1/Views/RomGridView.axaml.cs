@@ -60,6 +60,6 @@ public partial class RomGridView : UserControl
         }
 
         // TODO: replace with the real directory open once the path is available.
-        Debug.WriteLine($"Open Dir requested for ROM '{node.rRom}'.");
+        Debug.WriteLine($"Open Dir requested for ROM '{node.rName}'.");
     }
 }

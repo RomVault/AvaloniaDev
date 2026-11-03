@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:AvaloniaApplication1.ViewModels"
+             xmlns:controls="clr-namespace:AvaloniaApplication1.Controls"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:DataType="vm:GameGridViewModel"
              x:Class="AvaloniaApplication1.Views.GameGridView">
@@ -13,11 +14,13 @@
         <DataGrid ItemsSource="{Binding Games}"
                   x:Name="GamesGrid"
                   x:CompileBindings="False"
+                  SelectionChanged="GamesGrid_SelectionChanged"
                   AutoGenerateColumns="False" 
                   CanUserResizeColumns="True"
                   IsReadOnly="True"
                   GridLinesVisibility="All"
-                  RowHeight="20"
+                  FontSize="10"
+                  RowHeight="18"
                   ColumnHeaderHeight="25"
                   Margin="0,0,0,0">
             <DataGrid.ContextMenu>
@@ -32,6 +35,12 @@
             <DataGrid.Styles>
                 <Style Selector="DataGridRow">
                     <Setter Property="Background" Value="{Binding BgBrush}"/>
+                    <Setter Property="Foreground" Value="{Binding FgBrush}"/>
+                </Style>
+                <!-- Keep the node color visible when the row is selected. -->
+                <Style Selector="DataGridRow:selected /template/ Rectangle#BackgroundRectangle">
+                    <Setter Property="Fill" Value="{Binding BgBrush}"/>
+                    <Setter Property="Opacity" Value="1"/>
                 </Style>
                 <Style Selector="DataGridCell">
                     <Setter Property="Background" Value="Transparent"/>
@@ -41,10 +50,7 @@
                 <DataGridTemplateColumn Header="Type" Width="100">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Image Source="{Binding gType}"
-                                   Height="16"
-                                   Stretch="Uniform"
-                                   Margin="0"/>
+                            <controls:GameTypeCell Node="{Binding}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

@@ -1,5 +1,7 @@
 
 using CommunityToolkit.Mvvm.ComponentModel;
+using RomVaultCore.RvDB;
+using RVIO;
 
 namespace AvaloniaApplication1.ViewModels
 {
@@ -31,5 +33,27 @@ namespace AvaloniaApplication1.ViewModels
 
         [ObservableProperty]
         public partial string Version { get; set; } = "";
+
+
+        public void Set(RvFile tGame)
+        {
+            Name = tGame.Name;
+            if (tGame.Game==null)
+            {
+                Description = "";
+                Manufacturer = "";
+                return;
+            }
+            
+            string desc = tGame.Game.GetData(RvGame.GameData.Description);
+            if (desc == "¤") desc = Path.GetFileNameWithoutExtension(tGame.Name);
+            Description = desc;
+
+            Manufacturer = tGame.Game.GetData(RvGame.GameData.Manufacturer);
+            CloneOf = tGame.Game.GetData(RvGame.GameData.CloneOf);
+            RomOf = tGame.Game.GetData(RvGame.GameData.RomOf);
+            Year = tGame.Game.GetData(RvGame.GameData.Year);
+
+        }
     }
 }

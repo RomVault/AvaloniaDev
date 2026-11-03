@@ -65,12 +65,21 @@ namespace AvaloniaApplication1.ViewModels
 
 
             Tree.RowSelected += OnTreeRowSelected;
+            GameGrid.RowSelected += OnGameGridSelected;
+        }
+
+        private void OnGameGridSelected(object? sender, RvFile e)
+        {
+            TopGame.Set(e);
+            RomGrid.Set(e);
         }
 
         private void OnTreeRowSelected(object? sender, RVTreeViewModel e)
         {
             TopDat.Set(e.dTree);
+            GameGrid.Set(e.dTree);
         }
+
 
         private static void StartUpCode(ThreadWorker thWrk)
         {
