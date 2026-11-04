@@ -2,6 +2,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
+using AvaloniaApplication1.Helper;
 using AvaloniaApplication1.Models;
 using Compress.StructuredZip;
 using RomVaultCore.RvDB;
@@ -43,32 +44,9 @@ namespace AvaloniaApplication1.Controls
             if (node is null)
                 return;
             RvFile tRvDir = node.gFile;
-            
+
             Rect bounds = new(Bounds.Size);
             int width = (int)bounds.Width;
-            /*
-            // Optional background fill from the node.
-            if (node.bgColor.A != 0)
-                context.FillRectangle(new SolidColorBrush(node.bgColor), bounds);
-
-            // Draw the type string, vertically centered, with a small left pad.
-            string type = node.gFile?.Name ?? string.Empty;
-
-            var formatted = new FormattedText(
-                type,
-                System.Globalization.CultureInfo.CurrentCulture,
-                FlowDirection.LeftToRight,
-                Typeface.Default,
-                12,
-                node.FgBrush);
-
-            double x = 4;
-            double y = (bounds.Height - formatted.Height) / 2;
-            context.DrawText(formatted, new Point(x, y));
-
-            // Add your own overlays here, e.g.:
-            // context.DrawEllipse(Brushes.Red, null, new Point(bounds.Width - 5, 5), 3, 3);
-            */
 
 
             string bitmapNameDat = null;
@@ -79,7 +57,6 @@ namespace AvaloniaApplication1.Controls
             if (tRvDir.GotStatus != GotStatus.NotGot)
                 bitmapName = GetBitmapFromType(tRvDir.FileType, tRvDir.ZipStruct);
 
-            //Bitmap bmp = new Bitmap(GameGrid.Columns[(int)GameGridColumns.CType].Width, 18);
 
             int bm0 = -1;
             int bm1 = -1;
@@ -111,62 +88,43 @@ namespace AvaloniaApplication1.Controls
             if (tRvDir.GotStatus == GotStatus.Corrupt) { bitmapName += "Corrupt"; }
 
 
-            var formatted = new FormattedText(
-               bitmapNameDat??"",
-               System.Globalization.CultureInfo.CurrentCulture,
-               FlowDirection.LeftToRight,
-               Typeface.Default,
-               12,
-               node.FgBrush);
-
-            double x = 4;
-            double y = (bounds.Height - formatted.Height) / 2;
-            context.DrawText(formatted, new Point(x, y));
-
-            /*
-            using (Graphics g = Graphics.FromImage(bmp))
+            if (bm0 != -1)
             {
-                g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-
-                if (bm0 != -1)
+                Bitmap? bm = AssetsHelper.GetBitmap(bitmapNameDat);
+                if (bm != null)
                 {
-                    Bitmap bm = rvImages.GetBitmap(bitmapNameDat, false);
-                    if (bm != null)
-                    {
-                        float xSize = (float)bm.Width / bm.Height * 18;
-                        g.DrawImage(bm, (bm0 - (xSize / 2)), 0, xSize, 18);
-                    }
-                    else
-                    {
-                        Debug.WriteLine("Missing Graphic for " + bitmapNameDat);
-                    }
+                    double xSize = bm.Size.Width / bm.Size.Height * 18;
+                    context.DrawImage(bm, new Rect(0, 0, bm.Size.Width, bm.Size.Height), new Rect((bm0 - (xSize / 2)), 5, xSize, 18));
                 }
-
-                if (bm1 != -1)
+                else
                 {
-                    Bitmap bm = rvImages.GetBitmap(bitmapName, false);
-                    if (bm != null)
-                    {
-                        float xSize = (float)bm.Width / bm.Height * 18;
-                        g.DrawImage(bm, (bm1 - (xSize / 2)), 0, xSize, 18);
-                    }
-                    else
-                    {
-                        Debug.WriteLine("Missing Graphic for " + bitmapName);
-                    }
+                    Debug.WriteLine("Missing Graphic for " + bitmapNameDat);
                 }
+            }
 
-                if (bm2 != -1)
+            if (bm1 != -1)
+            {
+                Bitmap? bm = AssetsHelper.GetBitmap(bitmapName);
+                if (bm != null)
                 {
-                    Bitmap bm = rvImages.GetBitmap(tRvDir.ZipDatStructFix ? "ZipConvert" : "ZipConvert1", false);
-                    float xSize = (float)bm.Width / bm.Height * 18;
-                    g.DrawImage(bm, (bm2 - (xSize / 2)), 0, xSize, 18);
+                    double xSize = bm.Size.Width / bm.Size.Height * 18;
+                    context.DrawImage(bm, new Rect(0, 0, bm.Size.Width, bm.Size.Height), new Rect((bm1 - (xSize / 2)), 5, xSize, 18));
                 }
-            }*/
+                else
+                {
+                    Debug.WriteLine("Missing Graphic for " + bitmapName);
+                }
+            }
 
-            //e.Value = bmp;
-
+            if (bm2 != -1)
+            {
+                Bitmap? bm = AssetsHelper.GetBitmap(tRvDir.ZipDatStructFix ? "ZipConvert" : "ZipConvert1");
+                double xSize = bm.Size.Width / bm.Size.Height * 18;
+                context.DrawImage(bm, new Rect(0, 0, bm.Size.Width, bm.Size.Height), new Rect((bm2 - (xSize / 2)), 5, xSize, 18));
+            }
         }
+
+
 
 
         private static string GetBitmapFromType(FileType ft, ZipStructure zs)

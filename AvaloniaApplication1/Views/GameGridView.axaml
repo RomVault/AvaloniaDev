@@ -19,7 +19,7 @@
                   CanUserResizeColumns="True"
                   IsReadOnly="True"
                   GridLinesVisibility="All"
-                  FontSize="10"
+                  FontSize="12"
                   RowHeight="18"
                   ColumnHeaderHeight="25"
                   Margin="0,0,0,0">
@@ -44,6 +44,7 @@
                 </Style>
                 <Style Selector="DataGridCell">
                     <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="FontSize" Value="{Binding $parent[DataGrid].FontSize}"/>
                 </Style>
             </DataGrid.Styles>
             <DataGrid.Columns>
@@ -57,6 +58,13 @@
                 <DataGridTextColumn Header="Game (Directory /Zip)" Binding="{Binding gName}" Width="200"/>
                 <DataGridTextColumn Header="Description" Binding="{Binding gDescription}" Width="300"/>
                 <DataGridTextColumn Header="Modified" Binding="{Binding gDate}" Width="200"/>
+                <DataGridTemplateColumn Header="Status" Width="500">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <controls:GameStatusCell Node="{Binding}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
 
