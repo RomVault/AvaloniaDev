@@ -19,7 +19,7 @@
               IsReadOnly="True"
               GridLinesVisibility="All"
               SelectionMode="Single"
-              FontSize="12"
+              FontSize="13"
               RowHeight="18"
               ColumnHeaderHeight="25"
               Margin="0,0,0,0">

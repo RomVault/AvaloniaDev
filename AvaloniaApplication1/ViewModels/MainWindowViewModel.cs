@@ -66,6 +66,24 @@ namespace AvaloniaApplication1.ViewModels
 
             Tree.RowSelected += OnTreeRowSelected;
             GameGrid.RowSelected += OnGameGridSelected;
+
+            GameGrid.RowDoubleClicked += OnGameGridDoubleCheck;
+        }
+
+        private void OnGameGridDoubleCheck(object? sender, RowDoubleClickEventArgs e)
+        {
+            RvFile target = e.IsLeftButton ? e.File : e.File.Parent?.Parent;
+
+            if (target == null)
+                return;
+            if (target.Game != null)
+                return;
+            // Selecting the tree node raises Tree.RowSelected, which updates TopDat and GameGrid.
+            if (!Tree.Select(target))
+            {
+                TopDat.Set(target);
+                GameGrid.Set(target);
+            }
         }
 
         private void OnGameGridSelected(object? sender, RvFile e)

@@ -40,6 +40,63 @@ namespace AvaloniaApplication1.ViewModels
 
         public RvFile dTree;
 
+        /// <summary>
+        /// Whether this node is expanded in the TreeView.
+        /// </summary>
+        [ObservableProperty]
+        public partial bool IsExpanded { get; set; }
+
+        /// <summary>
+        /// Parent node, or null for top-level nodes.
+        /// </summary>
+        public RVTreeViewModel? Parent { get; private set; }
+
+        /// <summary>
+        /// Currently selected node (only used on the root view model, bound to TreeView.SelectedItem).
+        /// </summary>
+        [ObservableProperty]
+        public partial RVTreeViewModel? SelectedNode { get; set; }
+
+        /// <summary>
+        /// Selects the node for <paramref name="file"/>, expanding its ancestors so it is visible.
+        /// Returns false if the file is not in the tree.
+        /// </summary>
+        public bool Select(RvFile file)
+        {
+            RVTreeViewModel? node = Find(file);
+            if (node is null)
+            {
+                return false;
+            }
+
+            for (RVTreeViewModel? p = node.Parent; p is not null; p = p.Parent)
+            {
+                p.IsExpanded = true;
+            }
+
+            SelectedNode = node;
+            return true;
+        }
+
+        private RVTreeViewModel? Find(RvFile file)
+        {
+            foreach (RVTreeViewModel child in Children)
+            {
+                if (ReferenceEquals(child.dTree, file))
+                {
+                    return child;
+                }
+
+                RVTreeViewModel? found = child.Find(file);
+                if (found is not null)
+                {
+                    return found;
+                }
+            }
+
+            return null;
+        }
+
 
         public ObservableCollection<RVTreeViewModel> Children { get; } = new();
 
@@ -93,6 +150,7 @@ namespace AvaloniaApplication1.ViewModels
             thistxt += " " + subtxt;
             var t = new RVTreeViewModel(thistxt, pTree.Tree.Checked == RvTreeRow.TreeSelect.Selected, null);
             t.dTree = pTree;
+            t.Parent = dTree is null ? null : this;
             Children.Add(t);
             t.Setup(ref pTree);
         }

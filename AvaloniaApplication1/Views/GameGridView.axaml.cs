@@ -2,10 +2,9 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
-using Avalonia.Markup.Xaml;
+using Avalonia.VisualTree;
 using AvaloniaApplication1.Models;
 using System.ComponentModel;
-using System.Diagnostics;
 
 namespace AvaloniaApplication1.Views;
 
@@ -28,23 +27,37 @@ public partial class GameGridView : UserControl
     private void OnPointerPressedPreview(object? sender, PointerPressedEventArgs e)
     {
         _shiftOnPress = e.KeyModifiers.HasFlag(KeyModifiers.Shift);
-    }
 
-    private void GamesGrid_SelectionChanged(object? sender, SelectionChangedEventArgs e)
-    {
-        if (e.AddedItems.Count == 0)
+        if (e.ClickCount != 2)
         {
             return;
         }
 
-        if (e.AddedItems[0] is not GameNode selected)
+        PointerUpdateKind kind = e.GetCurrentPoint(this).Properties.PointerUpdateKind;
+        bool isRight;
+        if (kind == PointerUpdateKind.LeftButtonPressed)
+        {
+            isRight = false;
+        }
+        else if (kind == PointerUpdateKind.RightButtonPressed)
+        {
+            isRight = true;
+        }
+        else
+        {
+            return;
+        }
+
+        // Only rows count; ignore double-clicks on headers or empty space.
+        DataGridRow? row = (e.Source as Visual)?.FindAncestorOfType<DataGridRow>(includeSelf: true);
+        if (row?.DataContext is not GameNode node)
         {
             return;
         }
 
         if (DataContext is ViewModels.GameGridViewModel vm)
         {
-            vm.OnRowSelected(selected.gFile);
+            vm.OnRowDoubleClicked(node.gFile, isRight);
         }
     }
 
@@ -54,47 +67,6 @@ public partial class GameGridView : UserControl
         if (!_shiftOnPress)
         {
             e.Cancel = true;
-            return;
         }
-    }
-
-    /// <summary>
-    /// The row that was right-clicked, or null if the click was not on a row.
-    /// </summary>
-    private GameNode? SelectedNode =>
-        this.FindControl<DataGrid>("GamesGrid")?.SelectedItem as GameNode;
-
-    private void Scan1_Click(object? sender, RoutedEventArgs e)
-    {
-        RunScan(1);
-    }
-
-    /// <summary>
-    /// Runs a scan against the row that was right-clicked. Does nothing when
-    /// the context menu was opened away from a row.
-    /// </summary>
-    private void RunScan(int level)
-    {
-        GameNode? node = SelectedNode;
-        if (node is null)
-        {
-            return;
-        }
-
-        // TODO: replace with the real scan once the scanning service exists.
-        Debug.WriteLine(
-            $"Scan{level} requested for '{node.gName}' ({node.gDescription}), dated {node.gDate:yyyy-MM-dd}.");
-    }
-
-    private void Scan2_Click(object? sender, RoutedEventArgs e)
-    {
-    }
-
-    private void Scan3_Click(object? sender, RoutedEventArgs e)
-    {
-    }
-
-    private void OpenDir_Click(object? sender, RoutedEventArgs e)
-    {
     }
 }

@@ -1,0 +1,80 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Vector "Update DATs" icon (folder with documents), 32x32 design grid. -->
+    <DrawingImage x:Key="UpdateDatsIcon">
+        <DrawingGroup>
+            <GeometryDrawing Brush="Transparent" Geometry="M0,0 H32 V32 H0 Z"/>
+            <GeometryDrawing Brush="#E8A317"
+                             Geometry="M2,7 C2,5.9 2.9,5 4,5 L11,5 L13,8 L28,8 C29.1,8 30,8.9 30,10 L30,26 C30,27.1 29.1,28 28,28 L4,28 C2.9,28 2,27.1 2,26 Z">
+                <GeometryDrawing.Pen><Pen Brush="#A8730A" Thickness="1"/></GeometryDrawing.Pen>
+            </GeometryDrawing>
+            <GeometryDrawing Brush="#F4F4F4" Geometry="M7,3 H23 V20 H7 Z">
+                <GeometryDrawing.Pen><Pen Brush="#9A9A9A" Thickness="0.75"/></GeometryDrawing.Pen>
+            </GeometryDrawing>
+            <GeometryDrawing Brush="White" Geometry="M10,6 H26 V22 H10 Z">
+                <GeometryDrawing.Pen><Pen Brush="#8A8A8A" Thickness="0.75"/></GeometryDrawing.Pen>
+            </GeometryDrawing>
+            <GeometryDrawing Geometry="M12,9 H24 M12,11.5 H24 M12,14 H22 M12,16.5 H24">
+                <GeometryDrawing.Pen><Pen Brush="#9DB4CC" Thickness="1"/></GeometryDrawing.Pen>
+            </GeometryDrawing>
+            <GeometryDrawing Geometry="M1,14 L31,14 L29.5,26.8 C29.4,27.5 28.9,28 28.2,28 L3.8,28 C3.1,28 2.6,27.5 2.5,26.8 Z">
+                <GeometryDrawing.Brush>
+                    <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                        <GradientStop Offset="0" Color="#FFE98F"/>
+                        <GradientStop Offset="1" Color="#F2B705"/>
+                    </LinearGradientBrush>
+                </GeometryDrawing.Brush>
+                <GeometryDrawing.Pen><Pen Brush="#A8730A" Thickness="1"/></GeometryDrawing.Pen>
+            </GeometryDrawing>
+            <GeometryDrawing Geometry="M2.2,15 H29.8">
+                <GeometryDrawing.Pen><Pen Brush="#FFF6CC" Thickness="0.75"/></GeometryDrawing.Pen>
+            </GeometryDrawing>
+        </DrawingGroup>
+    </DrawingImage>
+
+    <!-- Vector "Scan ROMs" icon (stacked ROM chips + magnifying glass), 32x32 design grid. -->
+    <DrawingImage x:Key="ScanRomsIcon">
+        <DrawingGroup>
+            <GeometryDrawing Brush="Transparent" Geometry="M0,0 H32 V32 H0 Z"/>
+            <GeometryDrawing Brush="#C8C8C8"
+                             Geometry="M4,6 h1.2 v2 h-1.2 Z M7,6 h1.2 v2 h-1.2 Z M10,6 h1.2 v2 h-1.2 Z M13,6 h1.2 v2 h-1.2 Z M16,6 h1.2 v2 h-1.2 Z M19,6 h1.2 v2 h-1.2 Z
+                                       M4,15 h1.2 v2 h-1.2 Z M7,15 h1.2 v2 h-1.2 Z M10,15 h1.2 v2 h-1.2 Z M13,15 h1.2 v2 h-1.2 Z M16,15 h1.2 v2 h-1.2 Z M19,15 h1.2 v2 h-1.2 Z">
+                <GeometryDrawing.Pen><Pen Brush="#808080" Thickness="0.4"/></GeometryDrawing.Pen>
+            </GeometryDrawing>
+            <GeometryDrawing Brush="#4A4A4A" Geometry="M3,8 H21.5 V15 H3 Z">
+                <GeometryDrawing.Pen><Pen Brush="#1E1E1E" Thickness="0.75"/></GeometryDrawing.Pen>
+            </GeometryDrawing>
+            <GeometryDrawing Brush="#D8D8D8"
+                             Geometry="M2,13 h1.2 v2 h-1.2 Z M5,13 h1.2 v2 h-1.2 Z M8,13 h1.2 v2 h-1.2 Z M11,13 h1.2 v2 h-1.2 Z M14,13 h1.2 v2 h-1.2 Z M17,13 h1.2 v2 h-1.2 Z
+                                       M2,23 h1.2 v2 h-1.2 Z M5,23 h1.2 v2 h-1.2 Z M8,23 h1.2 v2 h-1.2 Z M11,23 h1.2 v2 h-1.2 Z M14,23 h1.2 v2 h-1.2 Z M17,23 h1.2 v2 h-1.2 Z">
+                <GeometryDrawing.Pen><Pen Brush="#808080" Thickness="0.4"/></GeometryDrawing.Pen>
+            </GeometryDrawing>
+            <GeometryDrawing Geometry="M1,15 H19.5 V23 H1 Z">
+                <GeometryDrawing.Brush>
+                    <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                        <GradientStop Offset="0" Color="#5C5C5C"/>
+                        <GradientStop Offset="1" Color="#2B2B2B"/>
+                    </LinearGradientBrush>
+                </GeometryDrawing.Brush>
+                <GeometryDrawing.Pen><Pen Brush="#1E1E1E" Thickness="0.75"/></GeometryDrawing.Pen>
+            </GeometryDrawing>
+            <GeometryDrawing Brush="#8A8A8A" Geometry="M2.5,19 A1,1 0 1 1 2.5,19.01 Z"/>
+            <GeometryDrawing Geometry="M22.5,19.5 L29,26.5">
+                <GeometryDrawing.Pen><Pen Brush="#3A3A3A" Thickness="3" LineCap="Round"/></GeometryDrawing.Pen>
+            </GeometryDrawing>
+            <GeometryDrawing Geometry="M25,13 A6,6 0 1 1 13,13 A6,6 0 1 1 25,13 Z">
+                <GeometryDrawing.Brush>
+                    <RadialGradientBrush>
+                        <GradientStop Offset="0" Color="#C0E8FFFF"/>
+                        <GradientStop Offset="1" Color="#8060B0E0"/>
+                    </RadialGradientBrush>
+                </GeometryDrawing.Brush>
+                <GeometryDrawing.Pen><Pen Brush="#2F6FA8" Thickness="1.5"/></GeometryDrawing.Pen>
+            </GeometryDrawing>
+            <GeometryDrawing Geometry="M15.8,11 A3.6,3.6 0 0 1 18.5,9.2">
+                <GeometryDrawing.Pen><Pen Brush="White" Thickness="1" LineCap="Round"/></GeometryDrawing.Pen>
+            </GeometryDrawing>
+        </DrawingGroup>
+    </DrawingImage>
+</ResourceDictionary>

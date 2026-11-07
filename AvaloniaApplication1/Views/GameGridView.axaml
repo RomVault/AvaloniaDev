@@ -11,62 +11,62 @@
         <vm:GameGridViewModel/>
     </Design.DataContext>
 
-        <DataGrid ItemsSource="{Binding Games}"
-                  x:Name="GamesGrid"
-                  x:CompileBindings="False"
-                  SelectionChanged="GamesGrid_SelectionChanged"
-                  AutoGenerateColumns="False" 
-                  CanUserResizeColumns="True"
-                  IsReadOnly="True"
-                  GridLinesVisibility="All"
-                  FontSize="12"
-                  RowHeight="18"
-                  ColumnHeaderHeight="25"
-                  Margin="0,0,0,0">
-            <DataGrid.ContextMenu>
-                <ContextMenu Opening="ContextMenu_Opening">
-                    <MenuItem Header="Scan1" Click="Scan1_Click"/>
-                    <MenuItem Header="Scan2" Click="Scan2_Click"/>
-                    <MenuItem Header="Scan3" Click="Scan3_Click"/>
-                    <Separator/>
-                    <MenuItem Header="Open Dir" Click="OpenDir_Click"/>
-                </ContextMenu>
-            </DataGrid.ContextMenu>
-            <DataGrid.Styles>
-                <Style Selector="DataGridRow">
-                    <Setter Property="Background" Value="{Binding BgBrush}"/>
-                    <Setter Property="Foreground" Value="{Binding FgBrush}"/>
-                </Style>
-                <!-- Keep the node color visible when the row is selected. -->
-                <Style Selector="DataGridRow:selected /template/ Rectangle#BackgroundRectangle">
-                    <Setter Property="Fill" Value="{Binding BgBrush}"/>
-                    <Setter Property="Opacity" Value="1"/>
-                </Style>
-                <Style Selector="DataGridCell">
-                    <Setter Property="Background" Value="Transparent"/>
-                    <Setter Property="FontSize" Value="{Binding $parent[DataGrid].FontSize}"/>
-                </Style>
-            </DataGrid.Styles>
-            <DataGrid.Columns>
-                <DataGridTemplateColumn Header="Type" Width="100">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <controls:GameTypeCell Node="{Binding}"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Game (Directory /Zip)" Binding="{Binding gName}" Width="200"/>
-                <DataGridTextColumn Header="Description" Binding="{Binding gDescription}" Width="300"/>
-                <DataGridTextColumn Header="Modified" Binding="{Binding gDate}" Width="200"/>
-                <DataGridTemplateColumn Header="Status" Width="500">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <controls:GameStatusCell Node="{Binding}"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
+    <DataGrid ItemsSource="{Binding Games}"
+              x:Name="GamesGrid"
+              x:CompileBindings="False"
+              SelectedItem="{Binding SelectedGame, Mode=TwoWay}"
+              AutoGenerateColumns="False"
+              CanUserResizeColumns="True"
+              IsReadOnly="True"
+              GridLinesVisibility="All"
+              FontSize="13"
+              RowHeight="18"
+              ColumnHeaderHeight="25"
+              Margin="0,0,0,0">
+        <DataGrid.ContextMenu>
+            <ContextMenu Opening="ContextMenu_Opening">
+                <MenuItem Header="Scan1" Command="{Binding ScanCommand}" CommandParameter="1"/>
+                <MenuItem Header="Scan2" Command="{Binding ScanCommand}" CommandParameter="2"/>
+                <MenuItem Header="Scan3" Command="{Binding ScanCommand}" CommandParameter="3"/>
+                <Separator/>
+                <MenuItem Header="Open Dir" Command="{Binding OpenDirCommand}"/>
+            </ContextMenu>
+        </DataGrid.ContextMenu>
+        <DataGrid.Styles>
+            <Style Selector="DataGridRow">
+                <Setter Property="Background" Value="{Binding BgBrush}"/>
+                <Setter Property="Foreground" Value="{Binding FgBrush}"/>
+            </Style>
+            <!-- Keep the node color visible when the row is selected. -->
+            <Style Selector="DataGridRow:selected /template/ Rectangle#BackgroundRectangle">
+                <Setter Property="Fill" Value="{Binding BgBrush}"/>
+                <Setter Property="Opacity" Value="1"/>
+            </Style>
+            <Style Selector="DataGridCell">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="FontSize" Value="{Binding $parent[DataGrid].FontSize}"/>
+            </Style>
+        </DataGrid.Styles>
+        <DataGrid.Columns>
+            <DataGridTemplateColumn Header="Type" Width="100">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <controls:GameTypeCell Node="{Binding}"/>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTextColumn Header="Game (Directory /Zip)" Binding="{Binding gName}" Width="200"/>
+            <DataGridTextColumn Header="Description" Binding="{Binding gDescription}" Width="300" IsVisible="{Binding HasDescription}"/>
+            <DataGridTextColumn Header="Modified" Binding="{Binding gDate}" Width="200"/>
+            <DataGridTemplateColumn Header="Status" Width="500">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <controls:GameStatusCell Node="{Binding}"/>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+        </DataGrid.Columns>
+    </DataGrid>
 
 
 </UserControl>

@@ -10,7 +10,13 @@
              x:Name="Root">
 
     <TreeView ItemsSource="{Binding Children}" SelectionChanged="TreeView_SelectionChanged"
+              SelectedItem="{Binding SelectedNode, Mode=TwoWay}"
               ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+        <TreeView.Styles>
+            <Style Selector="TreeViewItem" x:DataType="vm:RVTreeViewModel">
+                <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}"/>
+            </Style>
+        </TreeView.Styles>
         <TreeView.ContextMenu>
             <ContextMenu Opening="ContextMenu_Opening">
                 <MenuItem x:Name="miScan1" Header="Scan1" Click="Scan1_Click"/>
