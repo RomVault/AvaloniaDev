@@ -6,7 +6,7 @@ namespace AvaloniaApplication1.Views;
 
 /// <summary>
 /// A single row in the <see cref="RVTreeView"/>: check box, icon and name.
-/// The DataContext is the RVTreeViewModel for that node.
+/// The DataContext is the RVTreeRowViewModel for that node.
 /// </summary>
 public partial class RVTreeRow : UserControl
 {

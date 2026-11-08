@@ -18,7 +18,7 @@ public partial class RVTreeView : UserControl
     /// Right-clicking does not change TreeView.SelectedItem, so we capture
     /// the row ourselves on the press that opens the menu.
     /// </summary>
-    private RVTreeViewModel? _clickedNode;
+    private RVTreeRowViewModel? _clickedNode;
 
     public RVTreeView()
     {
@@ -32,12 +32,12 @@ public partial class RVTreeView : UserControl
     {
         // Walk up from whatever was hit to the owning row, then take its data item.
         TreeViewItem? row = (e.Source as Visual)?.FindAncestorOfType<TreeViewItem>(includeSelf: true);
-        _clickedNode = row?.DataContext as RVTreeViewModel;
+        _clickedNode = row?.DataContext as RVTreeRowViewModel;
     }
 
     private void ContextMenu_Opening(object? sender, CancelEventArgs e)
     {
-        RVTreeViewModel? node = _clickedNode;
+        RVTreeRowViewModel? node = _clickedNode;
 
         // Clicked empty space below the tree: nothing to act on.
         if (node is null)
@@ -82,7 +82,7 @@ public partial class RVTreeView : UserControl
             return;
         }
 
-        if (e.AddedItems[0] is not RVTreeViewModel selected)
+        if (e.AddedItems[0] is not RVTreeRowViewModel selected)
         {
             return;
         }

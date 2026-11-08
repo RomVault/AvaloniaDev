@@ -13,7 +13,7 @@
               SelectedItem="{Binding SelectedNode, Mode=TwoWay}"
               ScrollViewer.HorizontalScrollBarVisibility="Disabled">
         <TreeView.Styles>
-            <Style Selector="TreeViewItem" x:DataType="vm:RVTreeViewModel">
+            <Style Selector="TreeViewItem" x:DataType="vm:RVTreeRowViewModel">
                 <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}"/>
             </Style>
         </TreeView.Styles>
@@ -34,7 +34,7 @@
         </TreeView.Resources>
 
         <TreeView.ItemTemplate>
-            <TreeDataTemplate x:DataType="vm:RVTreeViewModel" ItemsSource="{Binding Children}">
+            <TreeDataTemplate x:DataType="vm:RVTreeRowViewModel" ItemsSource="{Binding Children}">
                 <views:RVTreeRow/>
             </TreeDataTemplate>
         </TreeView.ItemTemplate>

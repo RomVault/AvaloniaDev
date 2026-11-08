@@ -55,16 +55,16 @@
 
 
     <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Vertical">
-        <Button x:Name="bUpdate" Classes="ImageButton" ToolTip.Tip="Update DAT" Command="{Binding UpdateDatsCommand}">
+        <Button x:Name="bUpdate" Classes="ImageButton" ToolTip.Tip="Update DAT" IsEnabled="{Binding IsIdle}">
             <Image Stretch="Uniform"/>
         </Button>
-        <Button x:Name="bScan" Classes="ImageButton" ToolTip.Tip="Scan" Command="{Binding ScanRomsCommand}">
+        <Button x:Name="bScan" Classes="ImageButton" ToolTip.Tip="Scan" IsEnabled="{Binding IsIdle}">
             <Image Stretch="Uniform"/>
         </Button>
-        <Button x:Name="bFindFix" Classes="ImageButton" ToolTip.Tip="Find Fix" Command="{Binding FindFixesCommand}">
+        <Button x:Name="bFindFix" Classes="ImageButton" ToolTip.Tip="Find Fix" IsEnabled="{Binding IsIdle}">
             <Image Stretch="Uniform"/>
         </Button>
-        <Button x:Name="bFix" Classes="ImageButton" ToolTip.Tip="Fix" Command="{Binding FixFilesCommand}">
+        <Button x:Name="bFix" Classes="ImageButton" ToolTip.Tip="Fix" IsEnabled="{Binding IsIdle}">
             <Image Stretch="Uniform"/>
         </Button>
 
