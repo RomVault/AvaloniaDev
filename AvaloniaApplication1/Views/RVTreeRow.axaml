@@ -7,7 +7,9 @@
              x:Class="AvaloniaApplication1.Views.RVTreeRow">
 
     <StackPanel Orientation="Horizontal" Spacing="2">
-        <CheckBox IsChecked="{Binding IsChecked}" VerticalAlignment="Top"/>
+        <CheckBox IsChecked="{Binding IsChecked}" IsThreeState="True"
+                  IsEnabled="{Binding $parent[TreeView].((vm:RVTreeViewModel)DataContext).IsIdle}"
+                  VerticalAlignment="Top"/>
         <Image Source="{Binding Icon}" Width="20" Height="20" Stretch="Uniform" VerticalAlignment="Top"/>
         <StackPanel Orientation="Vertical">
             <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>

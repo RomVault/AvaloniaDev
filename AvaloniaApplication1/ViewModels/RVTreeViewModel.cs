@@ -24,6 +24,12 @@ namespace AvaloniaApplication1.ViewModels
         public partial RVTreeRowViewModel? SelectedNode { get; set; }
 
         /// <summary>
+        /// False while a long-running job is in progress; disables the row check boxes.
+        /// </summary>
+        [ObservableProperty]
+        public partial bool IsIdle { get; set; } = true;
+
+        /// <summary>
         /// Raised when a tree row is selected in the view.
         /// </summary>
         public event EventHandler<RVTreeRowViewModel>? RowSelected;
@@ -36,7 +42,7 @@ namespace AvaloniaApplication1.ViewModels
         /// <summary>
         /// Rebuilds the tree from <paramref name="dirTree"/> (normally DB.DirRoot).
         /// </summary>
-        public void Setup(ref RvFile dirTree, bool KeepSelected = false)
+        public void Setup(RvFile dirTree, bool KeepSelected = false)
         {
             RvFile? previous = KeepSelected ? SelectedNode?.dTree : null;
 

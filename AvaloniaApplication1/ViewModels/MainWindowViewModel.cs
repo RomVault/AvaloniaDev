@@ -1,14 +1,11 @@
 ﻿using Avalonia.Controls;
-using AvaloniaApplication1.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using RomVaultCore;
 using RomVaultCore.ReadDat;
 using RomVaultCore.RvDB;
+using RomVaultCore.Scanner;
 using RomVaultCore.Utils;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Runtime.Serialization.DataContracts;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -59,8 +56,6 @@ namespace AvaloniaApplication1.ViewModels
 
             progress.Report("Loading Cache...");
 
-
-
             await Task.Run(() =>
             {
                 _thWrk = new ThreadWorker(StartUpCode) { wReport = BgwProgressChanged, wFinal = BgwRunWorkerCompleted };
@@ -69,7 +64,7 @@ namespace AvaloniaApplication1.ViewModels
 
             progress.Report("Ready.");
 
-            Tree.Setup(ref DB.DirRoot);
+            Tree.Setup(DB.DirRoot);
 
 
             Tree.RowSelected += OnTreeRowSelected;
@@ -81,6 +76,7 @@ namespace AvaloniaApplication1.ViewModels
             LeftButtons.ScanRomsClicked += OnScanRomsClicked;
             LeftButtons.FindFixesClicked += OnFindFixesClicked;
             LeftButtons.FixFilesClicked += OnFixFilesClicked;
+
         }
 
         private void OnUpdateDatsClicked(object? sender, ButtonClickInfo e)
@@ -102,14 +98,13 @@ namespace AvaloniaApplication1.ViewModels
 
         private void OnScanRomsClicked(object? sender, ButtonClickInfo e)
         {
-            // TODO: replace with the real ROM scan.
-            System.Diagnostics.Debug.WriteLine($"Scan ROMs requested (right={e.IsRightClick}, shift={e.IsShift}).");
+            ScanRoms(EScanLevel.Level2);
         }
 
         private void OnFindFixesClicked(object? sender, ButtonClickInfo e)
         {
             // TODO: replace with the real fix search.
-            System.Diagnostics.Debug.WriteLine($"Find Fixes requested (right={e.IsRightClick}, shift={e.IsShift}).");
+            FindFixes(false);
         }
 
         private void OnFixFilesClicked(object? sender, ButtonClickInfo e)
@@ -161,6 +156,13 @@ namespace AvaloniaApplication1.ViewModels
         {
         }
 
+        partial void OnWorkingChanged(bool value)
+        {
+            TopMenu.IsIdle = !value;
+            LeftButtons.IsIdle = !value;
+            Tree.IsIdle = !value;
+        }
+
 
         private void Start()
         {
@@ -191,8 +193,9 @@ namespace AvaloniaApplication1.ViewModels
             // update the dats
             ProgressWindow window = new ProgressWindow { DataContext = progress };
 
-            progress.Initialize("Scanning Dats", DatUpdate.UpdateDat, null);
+            progress.Initialize("Scanning Dats", DatUpdate.UpdateDat, Finish);
 
+            Start();
             //progress.HideCancelButton();
             Window? owner = (Avalonia.Application.Current?.ApplicationLifetime as Avalonia.Controls.ApplicationLifetimes.IClassicDesktopStyleApplicationLifetime)?.MainWindow;
             if (owner is not null)
@@ -205,9 +208,11 @@ namespace AvaloniaApplication1.ViewModels
                 window.Show();
             }
 
+            Tree.Setup(DB.DirRoot);
             /*
             // rebuild the tree
             ctrRvTree.Setup(ref DB.DirRoot);
+            
 
             // if the rvFile.Parent is null it have been removed from the tree so remove it from the list.
             // set up until we find a rvFile with a parent.
@@ -224,6 +229,29 @@ namespace AvaloniaApplication1.ViewModels
             ctrRvTree.SetSelected(selected);
             DatSetSelected(selected);
         */
+        }
+
+        public ProgressWindow frmScanRoms = null;
+        public void ScanRoms(EScanLevel sd, RvFile StartAt = null)
+        {
+            FileScanning.StartAt = StartAt;
+            FileScanning.EScanLevel = sd;
+
+            ProgressWindowViewModel progress = new ProgressWindowViewModel();
+            frmScanRoms = new ProgressWindow() { DataContext = progress };
+            progress.Initialize("Scanning Dirs", FileScanning.ScanFiles, Finish);
+            Start();
+            frmScanRoms.Show();
+        }
+
+        public ProgressWindow frmFindFixes;
+        public void FindFixes(bool showLog = false)
+        {
+            ProgressWindowViewModel progress = new ProgressWindowViewModel();
+            frmFindFixes = new ProgressWindow() { DataContext = progress };
+            progress.Initialize("Finding Fixes", RomVaultCore.FindFix.FindFixes.ScanFiles, Finish);
+            Start();
+            frmFindFixes.Show();
         }
 
     }

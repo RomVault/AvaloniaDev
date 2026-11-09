@@ -50,11 +50,13 @@ namespace AvaloniaApplication1.ViewModels
         private bool _errorOpen = false;
 
         private ThreadWorker _thWrk;
+        private Finished _funcFinished;
 
-        public void Initialize(string titleRoot, WorkerStart function, Finished Function)
+        public void Initialize(string titleRoot, WorkerStart function, Finished funcFinished)
         {
             _titleRoot = titleRoot;
             Title = titleRoot;
+            _funcFinished = funcFinished;
             _thWrk = new ThreadWorker(function);
         }
 
@@ -224,7 +226,7 @@ namespace AvaloniaApplication1.ViewModels
                 tm = new System.Threading.Timer(trmClose, null, tElapsed, Timeout.Infinite);
             }
 */
-            //_funcFinished?.Invoke();
+            _funcFinished?.Invoke();
             //_parentForm.Show();
 
             // wFinal is called on the worker thread; close on the UI thread.
