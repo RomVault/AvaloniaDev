@@ -6,8 +6,19 @@
              x:DataType="vm:RVTreeRowViewModel"
              x:Class="AvaloniaApplication1.Views.RVTreeRow">
 
+    <UserControl.Styles>
+        <!-- Null (Locked) state: replace the Fluent indeterminate dash with a locked padlock. -->
+        <Style Selector="CheckBox:indeterminate /template/ Path#CheckGlyph">
+            <Setter Property="Data" Value="M2.5,6 V4 A3.5,3.5 0 0 1 9.5,4 V6 H8 V4 A2,2 0 0 0 4,4 V6 Z M1,6 H11 V14 H1 Z"/>
+            <Setter Property="Width" Value="9"/>
+            <Setter Property="Height" Value="11"/>
+        </Style>
+    </UserControl.Styles>
+
     <StackPanel Orientation="Horizontal" Spacing="2">
-        <CheckBox IsChecked="{Binding IsChecked}" IsThreeState="True"
+        <CheckBox IsChecked="{Binding IsChecked}" IsThreeState="False"
+                  PointerPressed="CheckBox_PointerPressed"
+                  ContextRequested="CheckBox_ContextRequested"
                   IsEnabled="{Binding $parent[TreeView].((vm:RVTreeViewModel)DataContext).IsIdle}"
                   VerticalAlignment="Top"/>
         <Image Source="{Binding Icon}" Width="20" Height="20" Stretch="Uniform" VerticalAlignment="Top"/>
