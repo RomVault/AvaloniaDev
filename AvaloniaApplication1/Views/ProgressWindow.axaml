@@ -6,9 +6,9 @@
         mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="200"
         x:Class="AvaloniaApplication1.ProgressWindow"
         x:DataType="vm:ProgressWindowViewModel"
-        Width="600" Height="160"
-        MinWidth="400" MinHeight="160"
-        MaxHeight="160"
+        Width="600" Height="170"
+        MinWidth="400" MinHeight="170"
+        MaxHeight="170"
         WindowStartupLocation="CenterOwner"
         Icon="/Assets/chip.ico"
         Title="{Binding Title}">
@@ -22,8 +22,8 @@
         <TextBlock Grid.Column="1" Text="{Binding Line1Progress}" Margin="10,0,0,0" VerticalAlignment="Center"/>
         <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding Line2}" Margin="10,0,0,0" VerticalAlignment="Center"/>
         <TextBlock Grid.Row="2" Grid.ColumnSpan="2" Text="{Binding Line3}" Margin="10,0,0,0" VerticalAlignment="Center"/>
-        <ProgressBar Grid.Row="3" Height="10" Minimum="0" Maximum="{Binding Progress1Max}" Margin="10,0,0,0" Value="{Binding Progress1Value}"  VerticalAlignment="Center"/>
-        <ProgressBar Grid.Row="4" Height="10" Minimum="0" Maximum="{Binding Progress2Max}" Margin="10,0,0,0" Value="{Binding Progress2Value}" VerticalAlignment="Center"/>
-        <Button Grid.Row="3" Grid.Column="1" Grid.RowSpan="2" Content="Cancel" Command="{Binding CancelCommand}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <ProgressBar Grid.Row="3" Height="10" Minimum="0" Maximum="{Binding Progress2Max}" Margin="10,0,0,0" IsVisible="{Binding Progress2Visible}" Value="{Binding Progress2Value}" VerticalAlignment="Center"/>
+        <ProgressBar Grid.Row="4" Height="10" Minimum="0" Maximum="{Binding Progress1Max}" Margin="10,0,0,0" Value="{Binding Progress1Value}"  VerticalAlignment="Center"/>
+        <Button Grid.Row="4" Grid.Column="1" Content="{Binding ButtonText}" IsEnabled="{Binding ButtonEnabled}" Command="{Binding CancelCommand}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
     </Grid>
 </Window>

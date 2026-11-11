@@ -16,7 +16,7 @@
     </UserControl.Styles>
 
     <StackPanel Orientation="Horizontal" Spacing="2">
-        <CheckBox IsChecked="{Binding IsChecked}" IsThreeState="False"
+        <CheckBox x:Name="RowCheck" IsChecked="{Binding IsChecked}" IsThreeState="False"
                   PointerPressed="CheckBox_PointerPressed"
                   ContextRequested="CheckBox_ContextRequested"
                   IsEnabled="{Binding $parent[TreeView].((vm:RVTreeViewModel)DataContext).IsIdle}"

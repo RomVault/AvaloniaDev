@@ -6,6 +6,7 @@ using RomVaultCore.RvDB;
 using RomVaultCore.Scanner;
 using RomVaultCore.Utils;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -188,25 +189,29 @@ namespace AvaloniaApplication1.ViewModels
                 selected = selected.Parent;
             }
             */
+            RVTreeRowViewModel? selectedNode = Tree.SelectedNode;
+            RvFile selected = selectedNode?.dTree;
+            List<RvFile> parents = new List<RvFile>();
+            if (selected != null)
+            {
+                while (selected != null)
+                {
+                    parents.Add(selected);
+                    selected = selected.Parent;
+                }
+            }
 
             ProgressWindowViewModel progress = new ProgressWindowViewModel();
             // update the dats
             ProgressWindow window = new ProgressWindow { DataContext = progress };
 
             progress.Initialize("Scanning Dats", DatUpdate.UpdateDat, Finish);
+            progress.HideCancelButton();
 
             Start();
-            //progress.HideCancelButton();
             Window? owner = (Avalonia.Application.Current?.ApplicationLifetime as Avalonia.Controls.ApplicationLifetimes.IClassicDesktopStyleApplicationLifetime)?.MainWindow;
-            if (owner is not null)
-            {
-                progress.HideCancelButton();
-                window.ShowDialog(owner);
-            }
-            else
-            {
-                window.Show();
-            }
+            window.ShowDialog(owner);
+
 
             Tree.Setup(DB.DirRoot);
             /*

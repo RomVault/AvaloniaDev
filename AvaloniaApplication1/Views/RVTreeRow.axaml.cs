@@ -1,7 +1,5 @@
-using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
-using Avalonia.Markup.Xaml;
 
 namespace AvaloniaApplication1.Views;
 
@@ -14,6 +12,27 @@ public partial class RVTreeRow : UserControl
     public RVTreeRow()
     {
         InitializeComponent();
+
+        // Tunnel so we see the left press before the CheckBox handles it.
+        RowCheck.AddHandler(PointerPressedEvent, RowCheck_PreviewPointerPressed, Avalonia.Interactivity.RoutingStrategies.Tunnel);
+    }
+
+    /// <summary>
+    /// Left click on a locked (null) check box goes straight to true.
+    /// Handling the press stops the CheckBox from also toggling on release.
+    /// </summary>
+    private void RowCheck_PreviewPointerPressed(object? sender, PointerPressedEventArgs e)
+    {
+        if (!RowCheck.IsEnabled)
+            return;
+
+        if (e.GetCurrentPoint(RowCheck).Properties.IsLeftButtonPressed
+            && DataContext is AvaloniaApplication1.ViewModels.RVTreeRowViewModel row
+            && row.IsChecked == null)
+        {
+            row.IsChecked = true;
+            e.Handled = true;
+        }
     }
 
     /// <summary>

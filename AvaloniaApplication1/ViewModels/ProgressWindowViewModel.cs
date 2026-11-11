@@ -39,9 +39,41 @@ namespace AvaloniaApplication1.ViewModels
         [ObservableProperty]
         public int progress2Value = 0;
 
+        [ObservableProperty]
+        public bool progress2Visible = false;
+
+        [ObservableProperty]
+        public string buttonText = "Cancel";
+
+        [ObservableProperty]
+        public bool buttonEnabled = true;
+        private bool _bDone;
+        public bool Cancelled;
+
         [RelayCommand]
         private void Cancel()
         {
+            if (_bDone)
+            {
+                /*
+                if (!_parentForm.Visible)
+                {
+                    _parentForm.Show();
+                }
+                */
+                Avalonia.Threading.Dispatcher.UIThread.Post(() => _funcFinished?.Invoke());
+                // wFinal is called on the worker thread; close on the UI thread.
+                Avalonia.Threading.Dispatcher.UIThread.Post(() => CloseRequested?.Invoke(this, System.EventArgs.Empty));
+            }
+            else
+            {
+                Cancelled = true;
+               
+                //cancelButton.Visible = true;
+                ButtonText = "Cancelling";
+                ButtonEnabled = false;
+                _thWrk.Cancel();
+            }
         }
 
 
@@ -68,8 +100,8 @@ namespace AvaloniaApplication1.ViewModels
         }
         public void HideCancelButton()
         {
-            //  cancelButton.Text = "Close";
-            //  cancelButton.Enabled = false;
+            ButtonText = "Close";
+            ButtonEnabled = false;
         }
 
         private void BgwProgressChanged(object obj)
@@ -134,7 +166,7 @@ namespace AvaloniaApplication1.ViewModels
             if (obj is bgwRange2Visible bgwR2V)
             {
                 //label2.Visible = bgwR2V.Visible;
-                //progressBar2.Visible = bgwR2V.Visible;
+                Progress2Visible = bgwR2V.Visible;
                 //lbl2Prog.Visible = bgwR2V.Visible;
                 return;
             }
@@ -207,26 +239,18 @@ namespace AvaloniaApplication1.ViewModels
                 return;
             }
             RVPlayer.PlaySound("audio\\complete.wav");
-            
+            */
 
             if (_errorOpen)
             {
-                cancelButton.Visible = true;
-                cancelButton.Text = "Close";
-                cancelButton.Enabled = true;
+                ButtonText = "Close";
+                ButtonEnabled = true;
+                //cancelButton.Visible = true;
                 _bDone = true;
+                return;
             }
-            else
-            {
-                long tElapsed = (long)sw.Elapsed.TotalMilliseconds;
-                if (tElapsed > 2000)
-                    tElapsed = 2000;
-                tElapsed = 2500 - tElapsed;
 
-                tm = new System.Threading.Timer(trmClose, null, tElapsed, Timeout.Infinite);
-            }
-*/
-            _funcFinished?.Invoke();
+            Avalonia.Threading.Dispatcher.UIThread.Post(() => _funcFinished?.Invoke());
             //_parentForm.Show();
 
             // wFinal is called on the worker thread; close on the UI thread.
